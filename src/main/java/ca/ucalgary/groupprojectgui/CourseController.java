@@ -9,35 +9,32 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 
+/**
+ * Model object of Course (for course table)
+ */
 public class CourseController {
 
-    @FXML
-    private TableView<Course> courseTableView;
+    private String courseName;
+    private String profName;
+    private String profEmail;
+    private boolean inProgress;
 
-    @FXML
-    private TableColumn<Course, String> courseNameColumn;
-
-    @FXML
-    private TableColumn<Course, String> professorNameColumn;
-
-    @FXML
-    private TableColumn<Course, String> professorEmailColumn;
-
-    @FXML
-    private TableColumn<Course, Boolean> inProgressColumn;
 
     private Data data; // Assuming you have a Data class to manage your data
 
-    // Initialize method
-    public void initialize() {
-        // Associate columns with model properties
-        courseNameColumn.setCellValueFactory(new PropertyValueFactory<>("courseName"));
-        professorNameColumn.setCellValueFactory(new PropertyValueFactory<>("profName"));
-        professorEmailColumn.setCellValueFactory(new PropertyValueFactory<>("profEmail"));
-        inProgressColumn.setCellValueFactory(new PropertyValueFactory<>("inProgress"));
-
-        // Set items to TableView
-        updateTableView();
+    /**
+     * Construcor
+     *
+     * @param courseName
+     * @param profName
+     * @param profEmail
+     * @param inProgress
+     */
+    public CourseController(String courseName, String profName, String profEmail, boolean inProgress){
+        this.courseName = courseName;
+        this.profName = profName;
+        this.profEmail = profEmail;
+        this.inProgress = inProgress;
     }
 
     // Update TableView with data from Data class

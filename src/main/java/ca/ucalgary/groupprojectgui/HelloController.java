@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -30,6 +31,20 @@ public class HelloController {
     private Label status;
 
     // course details ////////
+    @FXML
+    private TableView<Course> courseTableView;
+
+    @FXML
+    private TableColumn<Course, String> courseNameColumn;
+
+    @FXML
+    private TableColumn<Course, String> professorNameColumn;
+
+    @FXML
+    private TableColumn<Course, String> professorEmailColumn;
+
+    @FXML
+    private TableColumn<Course, Boolean> inProgressColumn;
 
     // project details ///////
 
@@ -48,6 +63,14 @@ public class HelloController {
 
     @FXML
     public void initialize() {
+        // Associate columns with model properties
+        courseNameColumn.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+        professorNameColumn.setCellValueFactory(new PropertyValueFactory<>("profName"));
+        professorEmailColumn.setCellValueFactory(new PropertyValueFactory<>("profEmail"));
+        inProgressColumn.setCellValueFactory(new PropertyValueFactory<>("inProgress"));
+
+        // Set items to the table
+        updateCourseList();
     }
 
 
@@ -150,7 +173,14 @@ public class HelloController {
      * Updates the course list
      */
     private void updateCourseList() {
-        // Implement this method to update the course list
+        // Assuming you have a method to get all courses from your Data instance
+        ArrayList<Course> allCourses = data.getAllCourses();
+
+        // Clear the existing items in the TableView
+        courseTableView.getItems().clear();
+
+        // Add all courses to the TableView
+        courseTableView.getItems().addAll(allCourses);
     }
 
 

@@ -2,9 +2,11 @@ package ca.ucalgary.groupprojectgui;
 
 import ca.ucalgary.groupprojectgui.objects.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * CPSC 233 W24 ca.ucalgary.groupprojectgui.objects.Project ca.ucalgary.groupprojectgui.Data.java - stores the data to be tracked. (course info, projects, grades, etc.)
@@ -448,6 +450,28 @@ public class Data {
             course.calculateActualGrade();
         }
         return actualGrades;
+    }
+
+
+
+    // For GUI
+    public ArrayList<CourseController> fetchedCoursesForTableView(boolean inProgressOnly){
+        ArrayList<Course> courses = sortCourses();
+        ArrayList<CourseController> courseControllers = null;
+        if(inProgressOnly) {
+            for (Course course : courses) {
+                if (!course.isInProgress()) { // course is closed
+                    courses.remove(course); // remove from the list
+                }
+            }
+
+        }
+        // Add to the list to return
+        for (Course course : getAllCourses()) {
+            CourseController courseController = new CourseController(course.getCourseName(), course.getProfName(), course.getProfEmail(), course.isInProgress());
+            courseControllers.add(courseController);
+        }
+        return courseControllers;
     }
 
 }
