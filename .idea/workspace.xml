@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b992ee-9616-4c97-8ffa-72d485e94cfd" name="Changes" comment="construct project (havent dealt with locations, special instructions etc)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/ProjectModel.java" afterDir="false" />
+    <list default="true" id="d5b992ee-9616-4c97-8ffa-72d485e94cfd" name="Changes" comment="Model for project">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/Data.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/objects/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/objects/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/ProjectModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/ProjectModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ca/ucalgary/groupprojectgui/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ca/ucalgary/groupprojectgui/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +190,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712596706564</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Model for project">
+      <option name="closed" value="true" />
+      <created>1712602919147</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1712602919147</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Model for project">
+      <option name="closed" value="true" />
+      <created>1712602933388</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1712602933388</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -228,14 +243,15 @@
     <MESSAGE value="made method in Data to return info needed for course table" />
     <MESSAGE value=" add a course to the table" />
     <MESSAGE value="construct project (havent dealt with locations, special instructions etc)" />
-    <option name="LAST_COMMIT_MESSAGE" value="construct project (havent dealt with locations, special instructions etc)" />
+    <MESSAGE value="Model for project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Model for project" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/HelloController.java</url>
-          <line>59</line>
+          <line>65</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
