@@ -1,12 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.groupprojectgui.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="448.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.groupprojectgui.HelloController">
+    <children>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#load" text="Load" />
+                  <MenuItem mnemonicParsing="false" onAction="#save" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveAs" text="Save As" />
+              <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+
+        <AnchorPane prefHeight="425.0" prefWidth="625.0">
+            <children>
+                <TabPane layoutX="-7.0" layoutY="22.0" prefHeight="362.0" prefWidth="632.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <Tab text="Course List">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="353.0" prefWidth="631.0">
+                                    <children>
+                                        <TableView fx:id="Table" layoutX="42.0" layoutY="14.0" prefHeight="282.0" prefWidth="576.0">
+                                            <columns>
+                                                <TableColumn fx:id="courseNameColumn" prefWidth="121.0" text="Course Name" />
+                                                <TableColumn fx:id="profNameColumn" prefWidth="172.0" text="Professor Name" />
+                                                <TableColumn fx:id="profEmailColumn" prefWidth="176.0" text="Professor Email" />
+                                                <TableColumn fx:id="targetGradeColumn" prefWidth="106.0" text="Target Grade" />
+                                            </columns>
+                                        </TableView>
+                                        <Button fx:id="addCourse" defaultButton="true" layoutX="272.0" layoutY="306.0" mnemonicParsing="false" text="Add a Course" />
+                                        <Button layoutX="62.0" layoutY="306.0" mnemonicParsing="false" text="Close a Course" />
+                                        <CheckBox layoutX="432.0" layoutY="311.0" mnemonicParsing="false" text="Show In-Progress Courses Only">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </CheckBox>
+                                  <Label fx:id="status" layoutX="14.0" layoutY="350.0" prefHeight="18.0" prefWidth="286.0" text="   " />
+                                    </children></AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Project List">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="405.0" prefWidth="661.0">
+                                    <children>
+                                        <TableView layoutX="26.0" layoutY="14.0" prefHeight="318.0" prefWidth="565.0">
+                                            <columns>
+                                                <TableColumn prefWidth="90.39995956420898" text="Project Type" />
+                                                <TableColumn prefWidth="115.20001220703125" text="Name" />
+                                                <TableColumn prefWidth="95.99996948242188" text="Weight" />
+                                                <TableColumn prefWidth="152.7999267578125" text="Deadline" />
+                                                <TableColumn prefWidth="68.79998779296875" text="Complete?" />
+                                            </columns>
+                                        </TableView>
+                                    </children></AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Grades">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </children>
+        </AnchorPane>
+
+    </children>
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -31,7 +117,4 @@
         </menus>
       </MenuBar>
    </top>
-   <bottom>
-      <Label text="HELLO!!!!!" BorderPane.alignment="CENTER" />
-   </bottom>
 </BorderPane>
