@@ -91,7 +91,18 @@
                         </Tab>
                         <Tab text="Grades">
                             <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="gradeTableView" layoutX="117.0" layoutY="27.0" prefHeight="253.0" prefWidth="419.0">
+                                <columns>
+                                  <TableColumn fx:id="gradeCourseNameColumn" prefWidth="149.0" text="Course Name" />
+                                  <TableColumn fx:id="targetGradeColumn" prefWidth="138.0" text="Target " />
+                                    <TableColumn fx:id="actualGradeColumn" prefWidth="131.0" text="Actual" />
+                                </columns>
+                              </TableView>
+                              <CheckBox fx:id="gradeInProgressOnlyCheckBox" layoutX="394.0" layoutY="280.0" mnemonicParsing="false" prefHeight="5.0" prefWidth="204.0" text="Show In-Progress Courses Only" />
+                              <Button layoutX="306.0" layoutY="298.0" mnemonicParsing="false" onAction="#refreshGradeTable" text="Refresh" />
+                           </children></AnchorPane>
                             </content>
                         </Tab>
                     </tabs>

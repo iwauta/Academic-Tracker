@@ -90,17 +90,37 @@ public class HelloController {
 
 
 
+    // Grades
+    @FXML
+    private TableView<GradeModel> gradeTableView;
+
+    @FXML
+    private CheckBox gradeInProgressOnlyCheckBox;
+
+    // List of models of Course objects
+    private ArrayList<GradeModel> gradeData;
+
+    @FXML
+    private TableColumn<GradeModel, String> gradeCourseNameColumn;
+
+    @FXML
+    private TableColumn<GradeModel, String> targetGradeColumn;
+
+    @FXML
+    private TableColumn<GradeModel, String> actualGradeColumn;
+
+
 
     @FXML
     public void initialize() {
         data = new Data();
-        // Associate columns with model properties
+        // Associate columns with model properties (Courses)
         courseNameColumn.setCellValueFactory(new PropertyValueFactory<>("courseName"));
         profNameColumn.setCellValueFactory(new PropertyValueFactory<>("profName"));
         profEmailColumn.setCellValueFactory(new PropertyValueFactory<>("profEmail"));
         inProgressColumn.setCellValueFactory(new PropertyValueFactory<>("inProgress"));
 
-        // Associate columns with model properties
+        // Associate columns with model properties (Projects)
         projectTypeColumn.setCellValueFactory(new PropertyValueFactory<>("projectType"));
         projectNameColumn.setCellValueFactory(new PropertyValueFactory<>("projectName"));
         projectWeightColumn.setCellValueFactory(new PropertyValueFactory<>("projectWeight"));
@@ -108,13 +128,18 @@ public class HelloController {
         projectSpecialColumn.setCellValueFactory(new PropertyValueFactory<>("projectSpecial"));
         projectPendingColumn.setCellValueFactory(new PropertyValueFactory<>("projectPending"));
 
+        // Associate columns with model properties (Grades)
+        gradeCourseNameColumn.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+        targetGradeColumn.setCellValueFactory(new PropertyValueFactory<>("targetGrade"));
+        actualGradeColumn.setCellValueFactory(new PropertyValueFactory<>("actualGrade"));
 
         // Populate TableView with data&initialize the table
         courseData = generateCourseTableContents(false);
         courseTableView.getItems().addAll(courseData);
-        // Populate TableView with data&initialize the table
         projectData = generateProjectTableContents(false);
         projectTableView.getItems().addAll(projectData);
+        gradeData = generateGradeTableContents(false);
+        gradeTableView.getItems().addAll(gradeData);
 
     }
 
@@ -312,6 +337,7 @@ public class HelloController {
         } else{ // show all the courses
             courseData = generateCourseTableContents(false);
         }
+        updateGradeList();
         courseTableView.getItems().addAll(courseData);
     }
 
@@ -594,6 +620,68 @@ public class HelloController {
     @FXML
     void checkPendingOnly(ActionEvent event){
         updateProjectList();
+    }
+
+
+    // Grades
+
+    /**
+     * Generates models for grade
+     * @param inProgressOnly true if in-progress courses only or false otherwise
+     * @return models of grades for the table
+     */
+    private ArrayList<GradeModel> generateGradeTableContents(boolean inProgressOnly){
+        ArrayList<Course> courses = new ArrayList<>();
+        // ArrayList of CourseModels to return
+        ArrayList<GradeModel> gradeModels = new ArrayList<>();
+        if(inProgressOnly) {
+            for (Course course : data.sortCourses()) {
+                if (course.isInProgress()) { // course is in-progress
+                    courses.add(course); // add from the list
+                }
+            }
+        } else {
+            for (Course course : data.sortCourses()) {
+                courses.add(course); // add from the list
+
+            }
+        }
+        // Add to the list to return
+        for (Course course : courses) {
+            String target = String.valueOf(course.getTargetGrade()) + "%";
+            String actual = String.valueOf(course.getActualGrade()) + "%";
+            GradeModel gradeModel = new GradeModel(course.getCourseName(), target, actual);
+            gradeModels.add(gradeModel);
+        }
+        return gradeModels;
+    }
+
+    /**
+     * Updates the table
+     */
+    private void updateGradeList(){
+        // Clear the existing items in the TableView
+        gradeTableView.getItems().clear();
+        gradeData.clear();
+        // Show In-Progress courses only
+        if(gradeInProgressOnlyCheckBox.isSelected()){
+            gradeData = generateGradeTableContents(true);
+        } else{ // show all the courses
+            gradeData = generateGradeTableContents(false);
+        }
+        // Add all the items to the TableView
+        gradeTableView.getItems().addAll(gradeData);
+        // Refresh the TableView
+        gradeTableView.refresh();
+    }
+
+    /**
+     * Updates table if user pressed refresh button
+     * @param actionEvent refresh button pressed
+     */
+    @FXML
+    void refreshGradeTable(ActionEvent actionEvent){
+        updateGradeList();
     }
 
 
