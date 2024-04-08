@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class HelloController {
@@ -32,19 +31,25 @@ public class HelloController {
 
     // course details ////////
     @FXML
-    private TableView<Course> courseTableView;
+    private TableView<CourseModel> courseTableView;
 
     @FXML
-    private TableColumn<Course, String> courseNameColumn;
+    private CheckBox inProgressOnlyCheckBox;
+
+    // List of models of Course objects
+    private ArrayList<CourseModel> courseData;
 
     @FXML
-    private TableColumn<Course, String> professorNameColumn;
+    private TableColumn<CourseModel, String> courseNameColumn;
 
     @FXML
-    private TableColumn<Course, String> professorEmailColumn;
+    private TableColumn<CourseModel, String> profNameColumn;
 
     @FXML
-    private TableColumn<Course, Boolean> inProgressColumn;
+    private TableColumn<CourseModel, String> profEmailColumn;
+
+    @FXML
+    private TableColumn<CourseModel, String> inProgressColumn;
 
     // project details ///////
 
@@ -65,12 +70,13 @@ public class HelloController {
     public void initialize() {
         // Associate columns with model properties
         courseNameColumn.setCellValueFactory(new PropertyValueFactory<>("courseName"));
-        professorNameColumn.setCellValueFactory(new PropertyValueFactory<>("profName"));
-        professorEmailColumn.setCellValueFactory(new PropertyValueFactory<>("profEmail"));
+        profNameColumn.setCellValueFactory(new PropertyValueFactory<>("profName"));
+        profEmailColumn.setCellValueFactory(new PropertyValueFactory<>("profEmail"));
         inProgressColumn.setCellValueFactory(new PropertyValueFactory<>("inProgress"));
 
-        // Set items to the table
-        updateCourseList();
+        // Populate TableView with data&initialize the table
+        courseData = generateCourseTableContents(false); // Implement this method to fetch data from your Data class
+        courseTableView.getItems().addAll(courseData);
     }
 
 
@@ -170,17 +176,59 @@ public class HelloController {
     }
 
     /**
+     * Controls list of Course models for the
+     * @param inProgressOnly want to display in-progress courses only(true) or not
+     * @return list of CourseControllers
+     */
+    private ArrayList<CourseModel> generateCourseTableContents(boolean inProgressOnly){
+        ArrayList<Course> courses = data.sortCourses();
+        // ArrayList of CourseControllers to return
+        ArrayList<CourseModel> courseModels = new ArrayList<>();
+        if(inProgressOnly) {
+            for (Course course : courses) {
+                if (!course.isInProgress()) { // course is closed
+                    courses.remove(course); // remove from the list
+                }
+            }
+        }
+        // Add to the list to return
+        for (Course course : courses) {
+            String inProgress;
+            if(course.isInProgress()){
+                inProgress = "IN-PROGRESS";
+            } else{
+                inProgress = "CLOSED";
+            }
+            CourseModel courseModel = new CourseModel(course.getCourseName(), course.getProfName(), course.getProfEmail(), inProgress);
+            courseModels.add(courseModel);
+        }
+
+        return courseModels;
+    }
+
+    /**
      * Updates the course list
      */
     private void updateCourseList() {
-        // Assuming you have a method to get all courses from your Data instance
-        ArrayList<Course> allCourses = data.getAllCourses();
-
         // Clear the existing items in the TableView
         courseTableView.getItems().clear();
+        courseData.clear();
+        // Show In-Progress courses only
+        if(inProgressOnlyCheckBox.isSelected()){
+            courseData = generateCourseTableContents(true); // Implement this method to fetch data from your Data class
+        } else{ // show all the courses
+            courseData = generateCourseTableContents(false); // Implement this method to fetch data from your Data class
+        }
+        courseTableView.getItems().addAll(courseData);
+    }
 
-        // Add all courses to the TableView
-        courseTableView.getItems().addAll(allCourses);
+    /**
+     * Updates the table when user checks on/off the checkbox
+     * @param event checking on/off the checkbox
+     */
+    @FXML
+    void checkInProgressOnly(ActionEvent event){
+        updateCourseList();
     }
 
 

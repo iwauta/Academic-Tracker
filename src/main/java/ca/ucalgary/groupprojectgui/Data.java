@@ -272,7 +272,7 @@ public class Data {
      *
      * @return ArrayList of Courses with 'closed' status
      */
-    private  ArrayList<Course> getClosedCourses() {
+    private ArrayList<Course> getClosedCourses() {
         ArrayList<Course> closedCourses = new ArrayList<>();
         for(Course course: this.courses) {
             if (!course.isInProgress()) {
@@ -286,7 +286,7 @@ public class Data {
      * Sorts the entire ArrayList of Projects.
      * @return Sorted list of all the projects (incomplete > complete, chronologically)
      */
-    public  ArrayList<Project> sortProjects() {
+    public ArrayList<Project> sortProjects() {
         // Clone of the list of the projects to return
         ArrayList<Project> sortedProjects = new ArrayList<>();
         // Divide into to groups based on status
@@ -454,25 +454,6 @@ public class Data {
 
 
 
-    // For GUI
-    public ArrayList<CourseController> fetchedCoursesForTableView(boolean inProgressOnly){
-        ArrayList<Course> courses = sortCourses();
-        ArrayList<CourseController> courseControllers = null;
-        if(inProgressOnly) {
-            for (Course course : courses) {
-                if (!course.isInProgress()) { // course is closed
-                    courses.remove(course); // remove from the list
-                }
-            }
-
-        }
-        // Add to the list to return
-        for (Course course : getAllCourses()) {
-            CourseController courseController = new CourseController(course.getCourseName(), course.getProfName(), course.getProfEmail(), course.isInProgress());
-            courseControllers.add(courseController);
-        }
-        return courseControllers;
-    }
 
 }
 
