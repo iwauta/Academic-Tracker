@@ -1,6 +1,9 @@
 package ca.ucalgary.groupprojectgui;
 
+import ca.ucalgary.groupprojectgui.objects.Assignment;
 import ca.ucalgary.groupprojectgui.objects.Course;
+import ca.ucalgary.groupprojectgui.objects.Exam;
+import ca.ucalgary.groupprojectgui.objects.Project;
 import ca.ucalgary.groupprojectgui.util.FileLoader;
 import ca.ucalgary.groupprojectgui.util.FileSaver;
 import javafx.animation.KeyFrame;
@@ -54,6 +57,26 @@ public class HelloController {
 
 
     // project details ///////
+    // List of models of Project objects
+    private ArrayList<ProjectModel> projectData;
+
+    @FXML
+    private TableColumn<ProjectModel, String> projectCourseNameColumn;
+
+    @FXML
+    private TableColumn<ProjectModel, String> projectNameColumn;
+
+    @FXML
+    private TableColumn<ProjectModel, String> projectWeightColumn;
+
+    @FXML
+    private TableColumn<ProjectModel, String> projectDeadlineColumn;
+
+    @FXML
+    private TableColumn<ProjectModel, String> projectPendingColumn;
+
+    @FXML
+    private TableColumn<ProjectModel, String> projectSpecialColumn;
 
 
 
@@ -61,6 +84,7 @@ public class HelloController {
 
     @FXML
     public void initialize() {
+        data = new Data();
         // Associate columns with model properties
         courseNameColumn.setCellValueFactory(new PropertyValueFactory<>("courseName"));
         profNameColumn.setCellValueFactory(new PropertyValueFactory<>("profName"));
@@ -131,6 +155,8 @@ public class HelloController {
             return false;
         }
         courseName = courseName.replace(" ", ""); // Remove all spaces
+        courseName = courseName.toUpperCase();
+        profEmail = profEmail.toLowerCase();
         // Course name too short or too long
         if (courseName.length() < MIN_LENGTH || courseName.length() > MAX_LENGTH) {
             errorStatus("Invalid course name.");
@@ -155,8 +181,6 @@ public class HelloController {
 
         // Adding course
         try {
-            courseName.toUpperCase();
-            profEmail.toLowerCase();
             boolean success= data.storeNewCourse(courseName, profName, profEmail, target);
             if(success) {
                 successStatus("Course stored.");
@@ -262,43 +286,38 @@ public class HelloController {
         TextField projectWeightTextField = new TextField();
         projectWeightTextField.setPromptText("Enter the project weight:");
 
-        TextField projectSpecialTextField = new TextField();
-        if(projectTypeChoiceBox.getValue().equals("EXAM")) {
-            projectSpecialTextField.setPromptText("Enter the location of the exam:");
-        } else if (projectTypeChoiceBox.getValue().equals("ASSIGNMENT")) {
-            projectSpecialTextField.setPromptText("Enter the instruction of the assignment:");
-        }
-        Scene newScene = new Scene(newRoot, 400, 400);
-        stage.setScene(newScene);
-        stage.setTitle("Add a Project:");
-        stage.show();
+        TextField projectLocationTextFiled = new TextField();
+        projectLocationTextFiled.setPromptText("Enter the location of the exam:");
 
+        TextField projectReviewTopicsTextFiled = new TextField();
+        projectReviewTopicsTextFiled.setPromptText("Enter the topics of the exam:");
 
+        TextField projectSpecialInstructionsTextFiled = new TextField();
+        projectSpecialInstructionsTextFiled.setPromptText("Enter the special instructions of the exam:");
 
         Button add = new Button("Add Project");
         add.setOnAction(event -> {
-            boolean success = constructProject(courseChoiceBox.getValue(), projectNameTextField.getText(), projectTypeChoiceBox.getValue(),projectWeightTextField.getText(), projectDeadlineDatePicker.getValue());
+            boolean success = constructProject(courseChoiceBox.getValue(), projectNameTextField.getText(), projectTypeChoiceBox.getValue(),projectWeightTextField.getText(), projectDeadlineDatePicker.getValue(),projectLocationTextFiled.getText(),projectReviewTopicsTextFiled.getText(),projectSpecialInstructionsTextFiled.getText());
             if (success) {
                 // Successfully added a project, update the list
                 updateProjectList();
                 stage.close();
             }
         });
-
-
         Button cancel = new Button("Cancel");
         cancel.setOnAction(event -> stage.close()); // cancel exists course constructor
+        newRoot.getChildren().addAll(courseChoiceBox, projectTypeChoiceBox, projectNameTextField, projectWeightTextField, projectDeadlineDatePicker,projectLocationTextFiled,projectReviewTopicsTextFiled,projectSpecialInstructionsTextFiled, add, cancel);
 
-        newRoot.getChildren().addAll(courseChoiceBox, projectTypeChoiceBox, projectNameTextField, projectWeightTextField, projectDeadlineDatePicker, add, cancel);
-
+        Scene newScene = new Scene(newRoot, 400, 400);
+        stage.setScene(newScene);
+        stage.setTitle("Add a Project:");
+        stage.show();
     }
-
-
 
     /**
      * Constructs a project object based on user input
      */
-    private boolean constructProject(String courseName, String projectName, String projectType, String projectWeight, LocalDate projectDeadline) {
+    private boolean constructProject(String courseName, String projectName, String projectType, String projectWeight, LocalDate projectDeadline, String location, String reviewTopics, String specialInstructions) {
         double weight;
         int[] deadline;
 
@@ -323,22 +342,37 @@ public class HelloController {
             errorStatus("Invalid project weight.");
             return false;
         }
+
         // Adding EXAM
         if (projectType.equals("EXAM")) {
             try {
-                boolean success = data.storeNewExam(courseName, projectName, weight, deadline, "location", "topics");
+                if (location.isEmpty()){
+                    location = null;
+                }
+                if(reviewTopics.isEmpty()){
+                    reviewTopics = null;
+                }
+
+                boolean success = data.storeNewExam(courseName, projectName, weight, deadline,location, reviewTopics);
                 if(success){
                     successStatus("Exam stored.");
                 }
+                else{
+                    errorStatus("Something went wrong.");
+                }
                 return success;
             } catch (Exception e) {
-                errorStatus("Could not store exam");
+                errorStatus("Could not store exam.");
                 return false;
             }
+
         } // Adding ASSIGNMENT
         else {
             try {
-                boolean success = data.storeNewAssignment(courseName, projectName, weight, deadline, "specialInstructions");
+                if(specialInstructions.isEmpty()){
+                    specialInstructions = null;
+                }
+                boolean success = data.storeNewAssignment(courseName, projectName, weight, deadline, specialInstructions);
                 if(success){
                     successStatus("Assignment stored.");
                 }
@@ -350,6 +384,45 @@ public class HelloController {
         }
     }
 
+
+    private ArrayList<ProjectModel> generateProjectTableContents(boolean pendingOnly){
+        ArrayList<Project> projects = data.sortProjects();
+        // ArrayList of CourseControllers to return
+        ArrayList<ProjectModel> projectModels = new ArrayList<>();
+        if(pendingOnly) {
+            for (Project project : projects) {
+                if (project.isProjectComplete()) { // project is complete
+                    projects.remove(project); // remove from the list
+                }
+            }
+        }
+        // Add to the list to return
+        for (Project project: projects) {
+            String pending;
+            if(project.isProjectComplete()){
+                pending = "COMPLETE";
+            } else{
+                pending = "PENDING";
+            }
+            String courseName = project.getCourseName();
+            String projectName = project.getProjectName();
+            String weight = String.valueOf(project.getProjectWeight());
+            String deadline = project.deadlineToString();
+            String special= "";
+            if(project instanceof Exam){
+                special = String.format("Location: %s, Topics: %s", ((Exam) project).getLocation(), ((Exam) project).getReviewTopics());
+            } else if (project instanceof Assignment){
+                special = String.format("Instruction: %s", ((Assignment) project).getSpecialInstructions());
+            }
+            ProjectModel projectModel = new ProjectModel(courseName,projectName,weight,deadline,special,pending);
+            projectModels.add(projectModel);
+        }
+        return projectModels;
+    }
+
+    private void updateProjectList(){
+
+    }
 
 
 
