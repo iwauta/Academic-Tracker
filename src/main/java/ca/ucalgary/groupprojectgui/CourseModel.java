@@ -22,6 +22,8 @@ public class CourseModel {
      * @param inProgress true-inprogress or false-closed
      */
     public CourseModel(String courseName, String profName, String profEmail, String inProgress){
+        courseName.toUpperCase();
+        profEmail.toLowerCase();
         this.courseName = courseName;
         this.profName = profName;
         this.profEmail = profEmail;

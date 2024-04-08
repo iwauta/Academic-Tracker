@@ -5,6 +5,7 @@ import ca.ucalgary.groupprojectgui.util.FileLoader;
 import ca.ucalgary.groupprojectgui.util.FileSaver;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import java.time.LocalDate;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -51,17 +52,9 @@ public class HelloController {
     @FXML
     private TableColumn<CourseModel, String> inProgressColumn;
 
+
     // project details ///////
 
-    private ChoiceBox<String> coursePickTF = new ChoiceBox();
-
-    private ChoiceBox<String> projectTypeTF = new ChoiceBox();
-
-    private TextField projectNameTF = new TextField();
-    private TextField projectWeightTF = new TextField();
-
-    private DatePicker projectDeadlineTF = new DatePicker();
-    private TextField examLocationTF = new TextField();
 
 
 
@@ -245,96 +238,116 @@ public class HelloController {
         Stage stage = new Stage();
         VBox newRoot = new VBox();
 
+        ChoiceBox<String> courseChoiceBox = new ChoiceBox();
+        ChoiceBox<String> projectTypeChoiceBox = new ChoiceBox();
+        DatePicker projectDeadlineDatePicker = new DatePicker();
+        TextField examLocationTF = new TextField();
+
+        // select course
         ArrayList<Course> courses = data.getInProgressCourses();
         String courseName;
         for (Course course : courses) {
             if (course.isInProgress()) {
-                courseName = course.getCourseName();
-                coursePickTF.getItems().add(courseName);
+                courseName = course.getCourseName().toUpperCase();
+                courseChoiceBox.getItems().add(courseName);
             }
         }
+        // select project type
+        projectTypeChoiceBox.getItems().addAll("EXAM", "ASSIGNMENT");
 
-        projectTypeTF.getItems().addAll("EXAM", "ASSIGNMENT");
+        // get user inputs
+        TextField projectNameTextField = new TextField();
+        projectNameTextField.setPromptText("Enter the project name:");
 
-        projectNameTF.setPromptText("Enter the project name:");
+        TextField projectWeightTextField = new TextField();
+        projectWeightTextField.setPromptText("Enter the project weight:");
 
-        projectWeightTF.setPromptText("Enter the project weight:");
-
+        TextField projectSpecialTextField = new TextField();
+        if(projectTypeChoiceBox.getValue().equals("EXAM")) {
+            projectSpecialTextField.setPromptText("Enter the location of the exam:");
+        } else if (projectTypeChoiceBox.getValue().equals("ASSIGNMENT")) {
+            projectSpecialTextField.setPromptText("Enter the instruction of the assignment:");
+        }
         Scene newScene = new Scene(newRoot, 400, 400);
-
         stage.setScene(newScene);
         stage.setTitle("Add a Project:");
         stage.show();
 
-        Button add = new Button("Add Project");
 
-        add.setOnAction(event -> constructProject()); // course is constructing using user input
+
+        Button add = new Button("Add Project");
+        add.setOnAction(event -> {
+            boolean success = constructProject(courseChoiceBox.getValue(), projectNameTextField.getText(), projectTypeChoiceBox.getValue(),projectWeightTextField.getText(), projectDeadlineDatePicker.getValue());
+            if (success) {
+                // Successfully added a project, update the list
+                updateProjectList();
+                stage.close();
+            }
+        });
+
 
         Button cancel = new Button("Cancel");
         cancel.setOnAction(event -> stage.close()); // cancel exists course constructor
 
-        newRoot.getChildren().addAll(coursePickTF, projectTypeTF, projectNameTF, projectWeightTF, projectDeadlineTF, add, cancel);
+        newRoot.getChildren().addAll(courseChoiceBox, projectTypeChoiceBox, projectNameTextField, projectWeightTextField, projectDeadlineDatePicker, add, cancel);
 
     }
+
+
 
     /**
      * Constructs a project object based on user input
      */
-    private void constructProject() {
-        String courseName = coursePickTF.getValue();
-        String projectName = projectNameTF.getText();
-        String projectType = projectTypeTF.getValue();
-        String projectWeightS = projectWeightTF.getText();
-        String projectDeadlineS = String.valueOf(projectDeadlineTF.getValue());
-        double projectWeight;
-        int[] projectDeadline = new int[3];
+    private boolean constructProject(String courseName, String projectName, String projectType, String projectWeight, LocalDate projectDeadline) {
+        double weight;
+        int[] deadline;
 
-        if (courseName.isEmpty() || projectType.isEmpty() || projectWeightS.isEmpty() || projectDeadlineS.isEmpty()) {
+        if (courseName.isEmpty() || projectType.isEmpty() || projectWeight.isEmpty()) {
             errorStatus("Invalid input. Make sure no fields are empty.");
-            return;
+            return false;
         } else if (data.checkProjectExistInCourse(courseName, projectName)) {
             errorStatus("Project already exists in course.");
-            return;
+            return false;
         }
 
         try {
-            projectWeight = Double.parseDouble(projectWeightS);
-
-            String[] parts = projectDeadlineS.split("-"); // deadline is turned into integer array
-            int date;
-            int i = 0;
-            for (String part : parts) {
-                date = Integer.parseInt(part);
-                projectDeadline[i] = date;
-                i++;
-            }
-
+            weight = Double.parseDouble(projectWeight);
+            // Convert LocalDate to an array of integers [day,month,year]
+            deadline = new int[]{projectDeadline.getDayOfMonth(), projectDeadline.getMonthValue(), projectDeadline.getYear()};
         } catch (NumberFormatException e) {
             errorStatus("Could not parse integer project weight.");
-            return;
+            return false;
         }
 
-        if (projectWeight < 0 || projectWeight > 100) {
-            errorStatus("Invalid target grade.");
-            return;
+        if (weight < 0 || weight > 100) {
+            errorStatus("Invalid project weight.");
+            return false;
         }
-
+        // Adding EXAM
         if (projectType.equals("EXAM")) {
             try {
-                data.storeNewExam(courseName, projectName, projectWeight, projectDeadline, "location", "topics");
-                successStatus("Exam stored.");
+                boolean success = data.storeNewExam(courseName, projectName, weight, deadline, "location", "topics");
+                if(success){
+                    successStatus("Exam stored.");
+                }
+                return success;
             } catch (Exception e) {
                 errorStatus("Could not store exam");
+                return false;
             }
-        } else {
+        } // Adding ASSIGNMENT
+        else {
             try {
-                data.storeNewAssignment(courseName, projectName, projectWeight, projectDeadline, "specialInstructions");
-                successStatus("Assignment stored.");
+                boolean success = data.storeNewAssignment(courseName, projectName, weight, deadline, "specialInstructions");
+                if(success){
+                    successStatus("Assignment stored.");
+                }
+                return success;
             } catch (Exception e) {
                 errorStatus("Could not store assignment");
+                return false;
             }
         }
-
     }
 
 
@@ -363,7 +376,7 @@ public class HelloController {
      * @param message Success message to print.
      */
     private void successStatus(String message){
-        status.setTextFill(Color.RED);
+        status.setTextFill(Color.GREEN);
         status.setText("Success! " + message);
 
         // clear the error message after 3 seconds
