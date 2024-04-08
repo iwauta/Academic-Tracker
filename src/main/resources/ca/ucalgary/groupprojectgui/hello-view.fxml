@@ -69,17 +69,18 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="405.0" prefWidth="661.0">
                                     <children>
-                                        <TableView layoutX="14.0" layoutY="14.0" prefHeight="261.0" prefWidth="626.0">
+                                        <TableView fx:id="projectTableView" layoutX="14.0" layoutY="14.0" prefHeight="261.0" prefWidth="626.0">
                                             <columns>
-                                                <TableColumn prefWidth="90.39995956420898" text="Project Type" />
-                                                <TableColumn prefWidth="115.20001220703125" text="Name" />
-                                                <TableColumn prefWidth="95.99996948242188" text="Weight" />
-                                                <TableColumn prefWidth="152.7999267578125" text="Deadline" />
-                                                <TableColumn prefWidth="68.79998779296875" text="Complete?" />
+                                                <TableColumn fx:id="projectTypeColumn" prefWidth="49.5" text="Type" />
+                                                <TableColumn fx:id="projectNameColumn" prefWidth="144.5" text="Name" />
+                                                <TableColumn fx:id="projectWeightColumn" prefWidth="51.0" text="Weight" />
+                                                <TableColumn fx:id="projectDeadlineColumn" prefWidth="128.0" text="Deadline" />
+                                                <TableColumn fx:id="projectPendingColumn" minWidth="0.0" prefWidth="110.0" text="Status" />
+                                    <TableColumn fx:id="projectSpecialColumn" minWidth="0.0" prefWidth="145.0" text="Special" />
                                             </columns>
                                         </TableView>
                                         <Button defaultButton="true" layoutX="283.0" layoutY="294.0" mnemonicParsing="false" onAction="#addProject" text="Add a Project" />
-                                        <CheckBox layoutX="460.0" layoutY="299.0" mnemonicParsing="false" text="Show Incomplete Projects Only">
+                                        <CheckBox fx:id="pendingOnlyCheckBox" layoutX="460.0" layoutY="299.0" mnemonicParsing="false" onAction="#checkPendingOnly" text="Show Incomplete Projects Only">
                                             <font>
                                                 <Font size="11.0" />
                                             </font>

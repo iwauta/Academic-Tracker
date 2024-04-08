@@ -4,20 +4,20 @@ package ca.ucalgary.groupprojectgui;
  * Model object of Project (for project table)
  */
 public class ProjectModel {
-    private String courseName;
     private String projectName;
-    private String weight;
-    private String deadline;
-    private String pending;
-    private String special;
+    private String projectWeight;
+    private String projectDeadline;
+    private String projectPending;
+    private String projectSpecial;
+    private String projectType;
 
-    public  ProjectModel(String courseName, String projectName, String weight, String deadline, String special,String pending){
-        this.courseName = courseName;
-        this.projectName = projectName;
-        this.weight = weight;
-        this.deadline = deadline;
-        this.special = special;
-        this.pending = pending;
+    public  ProjectModel(String projectName, String courseName, String weight, String deadline, String projectType,String special,String pending){
+        this.projectName = String.format("%s(%s)",projectName,courseName);
+        this.projectWeight = weight;
+        this.projectDeadline = deadline;
+        this.projectType = projectType;
+        this.projectSpecial = special;
+        this.projectPending = pending;
     }
 
 

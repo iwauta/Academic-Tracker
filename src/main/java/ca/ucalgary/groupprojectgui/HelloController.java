@@ -57,6 +57,12 @@ public class HelloController {
 
 
     // project details ///////
+    @FXML
+    private TableView<ProjectModel> projectTableView;
+
+    @FXML
+    private CheckBox pendingOnlyCheckBox;
+
     // List of models of Project objects
     private ArrayList<ProjectModel> projectData;
 
@@ -76,6 +82,9 @@ public class HelloController {
     private TableColumn<ProjectModel, String> projectPendingColumn;
 
     @FXML
+    private TableColumn<ProjectModel, String> projectTypeColumn;
+
+    @FXML
     private TableColumn<ProjectModel, String> projectSpecialColumn;
 
 
@@ -91,9 +100,22 @@ public class HelloController {
         profEmailColumn.setCellValueFactory(new PropertyValueFactory<>("profEmail"));
         inProgressColumn.setCellValueFactory(new PropertyValueFactory<>("inProgress"));
 
+        // Associate columns with model properties
+        projectTypeColumn.setCellValueFactory(new PropertyValueFactory<>("projectType"));
+        projectNameColumn.setCellValueFactory(new PropertyValueFactory<>("projectName"));
+        projectWeightColumn.setCellValueFactory(new PropertyValueFactory<>("projectWeight"));
+        projectDeadlineColumn.setCellValueFactory(new PropertyValueFactory<>("projectDeadline"));
+        projectSpecialColumn.setCellValueFactory(new PropertyValueFactory<>("projectSpecial"));
+        projectPendingColumn.setCellValueFactory(new PropertyValueFactory<>("projectPending"));
+
+
         // Populate TableView with data&initialize the table
-        courseData = generateCourseTableContents(false); // Implement this method to fetch data from your Data class
+        courseData = generateCourseTableContents(false);
         courseTableView.getItems().addAll(courseData);
+        // Populate TableView with data&initialize the table
+        projectData = generateProjectTableContents(false);
+        projectTableView.getItems().addAll(projectData);
+
     }
 
 
@@ -199,7 +221,7 @@ public class HelloController {
      */
     private ArrayList<CourseModel> generateCourseTableContents(boolean inProgressOnly){
         ArrayList<Course> courses = data.sortCourses();
-        // ArrayList of CourseControllers to return
+        // ArrayList of CourseModelss to return
         ArrayList<CourseModel> courseModels = new ArrayList<>();
         if(inProgressOnly) {
             for (Course course : courses) {
@@ -232,9 +254,9 @@ public class HelloController {
         courseData.clear();
         // Show In-Progress courses only
         if(inProgressOnlyCheckBox.isSelected()){
-            courseData = generateCourseTableContents(true); // Implement this method to fetch data from your Data class
+            courseData = generateCourseTableContents(true);
         } else{ // show all the courses
-            courseData = generateCourseTableContents(false); // Implement this method to fetch data from your Data class
+            courseData = generateCourseTableContents(false);
         }
         courseTableView.getItems().addAll(courseData);
     }
@@ -387,15 +409,18 @@ public class HelloController {
 
     private ArrayList<ProjectModel> generateProjectTableContents(boolean pendingOnly){
         ArrayList<Project> projects = data.sortProjects();
-        // ArrayList of CourseControllers to return
+        // ArrayList of ProjectModels to return
         ArrayList<ProjectModel> projectModels = new ArrayList<>();
         if(pendingOnly) {
+            ArrayList<Project> pendingProjects = new ArrayList<>();
             for (Project project : projects) {
-                if (project.isProjectComplete()) { // project is complete
-                    projects.remove(project); // remove from the list
+                if (!project.isProjectComplete()) {
+                    pendingProjects.add(project);
                 }
             }
+            projects = pendingProjects;
         }
+
         // Add to the list to return
         for (Project project: projects) {
             String pending;
@@ -408,22 +433,46 @@ public class HelloController {
             String projectName = project.getProjectName();
             String weight = String.valueOf(project.getProjectWeight());
             String deadline = project.deadlineToString();
+            String type = "";
             String special= "";
             if(project instanceof Exam){
+                type = "E";
                 special = String.format("Location: %s, Topics: %s", ((Exam) project).getLocation(), ((Exam) project).getReviewTopics());
             } else if (project instanceof Assignment){
+                type = "A";
                 special = String.format("Instruction: %s", ((Assignment) project).getSpecialInstructions());
             }
-            ProjectModel projectModel = new ProjectModel(courseName,projectName,weight,deadline,special,pending);
+            ProjectModel projectModel = new ProjectModel(projectName,courseName,weight,deadline,type,special,pending);
             projectModels.add(projectModel);
         }
         return projectModels;
     }
 
+    /**
+     * Updates the table of projects
+     */
     private void updateProjectList(){
-
+        // Clear the existing items in the TableView
+        projectTableView.getItems().clear();
+        projectData.clear();
+        // Show In-Progress courses only
+        if(pendingOnlyCheckBox.isSelected()){
+            projectData = generateProjectTableContents(true);
+        } else{ // show all the courses
+            projectData = generateProjectTableContents(false);
+        }
+        // Add all the items to the TableView
+        projectTableView.getItems().addAll(projectData);
     }
 
+    /**
+     * Updates the table when user checks on/off the checkbox
+     * @param event checking on/off the checkbox
+     */
+    @FXML
+    void checkPendingOnly(ActionEvent event){
+        updateProjectList();
+    }
 
 
 
