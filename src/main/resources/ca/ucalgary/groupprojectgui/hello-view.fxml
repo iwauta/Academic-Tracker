@@ -52,7 +52,7 @@
                                                 <TableColumn fx:id="courseNameColumn" prefWidth="121.0" text="Course Name" />
                                                 <TableColumn fx:id="profNameColumn" prefWidth="172.0" text="Professor Name" />
                                                 <TableColumn fx:id="profEmailColumn" prefWidth="176.0" text="Professor Email" />
-                                                <TableColumn fx:id="targetGradeColumn" prefWidth="106.0" text="Target Grade" />
+                                                <TableColumn fx:id="courseStatusColumn" prefWidth="106.0" text="Target Grade" />
                                             </columns>
                                         </TableView>
                                         <Button defaultButton="true" layoutX="283.0" layoutY="307.0" mnemonicParsing="false" onAction="#addCourse" text="Add a Course" />

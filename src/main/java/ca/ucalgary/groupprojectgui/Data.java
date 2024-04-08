@@ -48,6 +48,8 @@ public class Data {
     public boolean storeNewCourse(String courseName, String profName, String profEmail, Double targetGrade) throws Exception {
         // Adds to the list unless the course already exists in the list
         if (!checkExistCourse(courseName)) {
+            courseName.toUpperCase();
+            profEmail.toLowerCase();
             Course course = new Course(courseName, new Professor(profName, profEmail),targetGrade);
             this.courses.add(course); // Added a new course
             Double actualGrade = course.getActualGrade();

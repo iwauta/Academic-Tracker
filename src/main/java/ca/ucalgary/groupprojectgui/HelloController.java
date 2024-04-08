@@ -31,12 +31,6 @@ public class HelloController {
 
     // course details ////////
 
-    private TextField courseNameTF = new TextField();
-    private TextField profNameTF = new TextField();
-
-    private TextField profEmailTF = new TextField();
-    private TextField targetGradeTF = new TextField();
-
     // project details ///////
 
     private ChoiceBox<String> coursePickTF = new ChoiceBox();
@@ -57,6 +51,8 @@ public class HelloController {
     }
 
 
+    // Courses
+
     /**
      * Constructs a course entered by the user
      * Tales user to new stage to add course details
@@ -64,78 +60,102 @@ public class HelloController {
      */
     @FXML
     void addCourse(ActionEvent actionEvent) {
-        // new scene opens to construct a course
         Stage stage = new Stage();
         VBox newRoot = new VBox();
 
-        courseNameTF.setPromptText("Enter the course name:");
+        TextField courseNameTextField = new TextField();
+        courseNameTextField.setPromptText("Enter the course name:");
+        TextField profNameTextField = new TextField();
+        profNameTextField.setPromptText("Enter the professor's name:");
+        TextField profEmailTextField = new TextField();
+        profEmailTextField.setPromptText("Enter the professor's email address (ending in @ucalgary.ca):");
+        TextField targetGradeTextField = new TextField();
+        targetGradeTextField.setPromptText("Enter your target grade for this course:");
 
-        profNameTF.setPromptText("Enter the professor's name:");
+        Button add = new Button("Add Course");
+        add.setOnAction(event -> {
+            boolean success = constructCourse(courseNameTextField.getText(), profNameTextField.getText(),
+                    profEmailTextField.getText(), targetGradeTextField.getText());
+            if (success) {
+                // Successfully added a course, update the list
+                updateCourseList();
+                stage.close();
+            }
+        });
 
-        profEmailTF.setPromptText("Enter the professor's email address (ending in @ucalgary.ca):");
+        Button cancel = new Button("Cancel");
+        cancel.setOnAction(event -> stage.close());
 
-        targetGradeTF.setPromptText("Enter you target grade for this course:");
+        newRoot.getChildren().addAll(courseNameTextField, profNameTextField, profEmailTextField,
+                targetGradeTextField, add, cancel);
 
         Scene newScene = new Scene(newRoot, 400, 400);
-
         stage.setScene(newScene);
         stage.setTitle("Add a course:");
         stage.show();
-
-        Button add = new Button("Add Course");
-
-        add.setOnAction(event -> constructCourse()); // course is constructing using user input
-
-        Button cancel = new Button("Cancel");
-        cancel.setOnAction(event -> stage.close()); // cancel exists course constructor
-
-        newRoot.getChildren().addAll(courseNameTF, profNameTF, profEmailTF, targetGradeTF, add, cancel);
-
     }
 
     /**
-     * Constructs a course object based on user input
+     * Constructs a course object based on user input; update status based on errors if there was any.
+     * @return true if adding a course was successful or false otherwise
      */
-    private void constructCourse() {
-        String courseName = courseNameTF.getText();
-        String profName = profNameTF.getText();
-        String profEmail = profEmailTF.getText();
-        String target = targetGradeTF.getText();
-        double targetGrade;
-
-        if (courseName.isEmpty() || profName.isEmpty() || target.isEmpty()) {
+    private boolean constructCourse(String courseName, String profName, String profEmail, String targetGrade) {
+        final int MIN_LENGTH = 6;
+        final int MAX_LENGTH = 7;
+        Double target;
+        // Empty input
+        if (courseName.isEmpty() || profName.isEmpty() || profEmail.isEmpty() || targetGrade.isEmpty()) {
             errorStatus("Invalid input. Make sure no fields are empty.");
-            return;
+            return false;
+        }
+        courseName = courseName.replace(" ", ""); // Remove all spaces
+        // Course name too short or too long
+        if (courseName.length() < MIN_LENGTH || courseName.length() > MAX_LENGTH) {
+            errorStatus("Invalid course name.");
+            return false;
         } else if (!profEmail.endsWith("@ucalgary.ca")) {
             errorStatus("Invalid email address.");
-            return;
+            return false;
         } else if (data.checkExistCourse(courseName)) {
-            errorStatus("Invalid email address.");
-            return;
+            errorStatus("Course already tracked.");
+            return false;
         }
-
         try {
-            targetGrade = Double.parseDouble(target);
+            target = Double.parseDouble(targetGrade);
+            if (target < 0 || target > 100) {
+                errorStatus("Invalid target grade.");
+                return false;
+            }
         } catch (NumberFormatException e) {
-            errorStatus("Could not parse integer target grade.");
-            return;
+            errorStatus("Invalid target grade. Please enter a number.");
+            return false;
         }
 
-        if (targetGrade < 0 || targetGrade > 100) {
-            errorStatus("Invalid target grade.");
-            return;
-        }
-
+        // Adding course
         try {
-            data.storeNewCourse(courseName, profName, profEmail, targetGrade);
-            successStatus("Course stored.");
+            courseName.toUpperCase();
+            profEmail.toLowerCase();
+            boolean success= data.storeNewCourse(courseName, profName, profEmail, target);
+            if(success) {
+                successStatus("Course stored.");
+                return true;
+            }
         } catch (Exception e) {
-            errorStatus("Could not store course");
-            return;
+            errorStatus("Could not store course.");
         }
-
-
+        return false;
     }
+
+    /**
+     * Updates the course list
+     */
+    private void updateCourseList() {
+        // Implement this method to update the course list
+    }
+
+
+
+    // Projects
 
     /**
      * Tales user to new stage to add course details
@@ -178,7 +198,6 @@ public class HelloController {
         newRoot.getChildren().addAll(coursePickTF, projectTypeTF, projectNameTF, projectWeightTF, projectDeadlineTF, add, cancel);
 
     }
-
 
     /**
      * Constructs a project object based on user input
@@ -240,6 +259,11 @@ public class HelloController {
 
     }
 
+
+
+
+
+    // Status
     /**
      * Shows red error message
      * @param message Error message to print.
@@ -288,6 +312,9 @@ public class HelloController {
     }
 
 
+
+    // Menu bar
+
     /**
      * Loads the current data from .csv file of user's choice
      * @param event user selects "File -> Load"
@@ -312,7 +339,6 @@ public class HelloController {
         }
     }
 
-
     /**
      * Saves the current data in .csv file. (saves to 'data.csv' by default)
      * @param event user selects "File -> Save"
@@ -332,10 +358,9 @@ public class HelloController {
 
     /**
      * Saves the current data in .csv file of users choice, changes default file to user's choice of file
-     * @param event user selects "File -> Save As"
      */
     @FXML
-    void saveAs(ActionEvent event) {
+    void saveAs() {
         try {
             FileChooser fileChooser = new FileChooser();
             File selectedFile = fileChooser.showSaveDialog(new Stage());
@@ -357,10 +382,9 @@ public class HelloController {
 
     /**
      * Provides user with information about GUI's function
-     * @param event user selects "Help -> About"
      */
     @FXML
-    void about(ActionEvent event) {
+    void about() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About");
         alert.setHeaderText("Course Tracker v" + HelloApplication.version);
@@ -372,12 +396,23 @@ public class HelloController {
     }
 
     /**
-     * Quits GUI
-     * @param event user selects "File -> Quit"
+     * Quits the application after confirming with the user.
      */
     @FXML
-    void quit(ActionEvent event) {
-        Platform.exit();
+    void quit() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Quit Application");
+        alert.setContentText("Are you sure you want to quit?");
+        // Add OK and Cancel buttons
+        alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+        // Show the dialog and handle user's choice
+        alert.showAndWait().ifPresent(result -> {
+            if (result == ButtonType.OK) {
+                // If user chooses OK, exit the application
+                Platform.exit();
+            }
+        });
     }
 
 
