@@ -253,7 +253,7 @@ public class Data {
      *
      * @return ArrayList of Courses with 'in-progress' status
      */
-    private  ArrayList<Course> getInProgressCourses() {
+    public ArrayList<Course> getInProgressCourses() {
         ArrayList<Course> inProgressCourses = new ArrayList<>();
         for(Course course: courses) {
             if (course.isInProgress()) {
