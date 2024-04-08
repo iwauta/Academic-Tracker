@@ -79,7 +79,6 @@ public class Data {
                 return true;
             }
         } // No course with the same course name found
-        System.out.println(courseName + " does not exist");
         return false;
     }
 

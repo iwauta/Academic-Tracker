@@ -163,54 +163,9 @@ public class HelloController {
         stage.show();
     }
 
-    @FXML
-    void closeCourse(ActionEvent actionEvent){
-        Stage stage = new Stage();
-        VBox newRoot = new VBox();
-
-        Label label = new Label("Course to close:");
-        ChoiceBox<String> courseChoiceBox = new ChoiceBox();
-        // select course
-        ArrayList<Course> courses = data.getInProgressCourses();
-        String courseName;
-        for (Course course : courses) {
-            if (course.isInProgress()) {
-                courseName = course.getCourseName().toUpperCase();
-                courseChoiceBox.getItems().add(courseName);
-            }
-        }
-        Button closeCourseButton = new Button("Close");
-        closeCourseButton.setOnAction(event -> {
-            courseClosure(courseChoiceBox.getValue());
-            stage.close();
-        });
-        Button cancel = new Button("Cancel");
-        cancel.setOnAction(event -> stage.close());
-        newRoot.getChildren().addAll(label,courseChoiceBox,closeCourseButton,cancel);
-        Scene newScene = new Scene(newRoot, 400, 400);
-        stage.setScene(newScene);
-        stage.setTitle("Close a course:");
-        stage.show();
-    }
-
-    /**
-     * Close a course
-     * @param courseName name of the course to close
-     */
-    private void courseClosure(String courseName){
-        for(Course course: data.getAllCourses()){
-            if(course.getCourseName().equals(courseName)){
-                course.closeCourse();
-                successStatus(courseName+" closed.");
-                continue;
-            }
-        }
-        updateCourseList();
-    }
-
     /**
      * Constructs a course object based on user input; update status based on errors if there was any.
-     * @return true if adding a course was successful or false otherwise
+     * @return true if adding a course was successful or false otherwis
      */
     private boolean constructCourse(String courseName, String profName, String profEmail, String targetGrade) {
         final int MIN_LENGTH = 6;
@@ -259,20 +214,74 @@ public class HelloController {
         return false;
     }
 
+    @FXML
+    void closeCourse(ActionEvent actionEvent){
+        Stage stage = new Stage();
+        VBox newRoot = new VBox();
+
+        Label label = new Label("Course to close:");
+        ChoiceBox<String> courseChoiceBox = new ChoiceBox();
+        // select course
+        ArrayList<Course> courses = data.getInProgressCourses();
+        String courseName;
+        for (Course course : courses) {
+            if (course.isInProgress()) {
+                courseName = course.getCourseName().toUpperCase();
+                courseChoiceBox.getItems().add(courseName);
+            }
+        }
+        Button closeCourseButton = new Button("Close");
+        closeCourseButton.setOnAction(event -> {
+            courseClosure(courseChoiceBox.getValue());
+            stage.close();
+        });
+        Button cancel = new Button("Cancel");
+        cancel.setOnAction(event -> stage.close());
+        newRoot.getChildren().addAll(label,courseChoiceBox,closeCourseButton,cancel);
+        Scene newScene = new Scene(newRoot, 400, 400);
+        stage.setScene(newScene);
+        stage.setTitle("Close a course:");
+        stage.show();
+    }
+
+    /**
+     * Close a course
+     * @param courseName name of the course to close
+     */
+    private void courseClosure(String courseName){
+        if(courseName.isEmpty()){
+            errorStatus("Please select a course.");
+            return;
+        }
+        for(Course course: data.getAllCourses()){
+            if(course.getCourseName().equals(courseName)){
+                course.closeCourse();
+                successStatus(courseName+" closed.");
+                continue;
+            }
+        }
+        updateCourseList();
+    }
+
     /**
      * Controls list of Course models for the
      * @param inProgressOnly want to display in-progress courses only(true) or not
      * @return list of CourseControllers
      */
     private ArrayList<CourseModel> generateCourseTableContents(boolean inProgressOnly){
-        ArrayList<Course> courses = data.sortCourses();
-        // ArrayList of CourseModelss to return
+        ArrayList<Course> courses = new ArrayList<>();
+        // ArrayList of CourseModels to return
         ArrayList<CourseModel> courseModels = new ArrayList<>();
         if(inProgressOnly) {
-            for (Course course : courses) {
-                if (!course.isInProgress()) { // course is closed
-                    courses.remove(course); // remove from the list
+            for (Course course : data.sortCourses()) {
+                if (course.isInProgress()) { // course is in-progress
+                    courses.add(course); // add from the list
                 }
+            }
+        } else {
+            for (Course course : data.sortCourses()) {
+                courses.add(course); // add from the list
+
             }
         }
         // Add to the list to return
@@ -449,6 +458,70 @@ public class HelloController {
                 return false;
             }
         }
+    }
+
+    /**
+     * Mark project complete, update the table
+     * @param actionEvent park project complete button clicked
+     */
+    @FXML
+    void closeProject(ActionEvent actionEvent){
+        Stage stage = new Stage();
+        VBox newRoot = new VBox();
+
+        Label label = new Label("Project to mark complete:");
+        ChoiceBox<String> courseChoiceBox = new ChoiceBox();
+        // select course
+        ArrayList<Course> courses = data.getInProgressCourses();
+        String courseName;
+        for (Course course : courses) {
+            if (course.isInProgress()) {
+                courseName = course.getCourseName().toUpperCase();
+                courseChoiceBox.getItems().add(courseName);
+            }
+        }
+
+        ChoiceBox<String> projectChoiceBox = new ChoiceBox();
+        // select course
+        ArrayList<Project> projects = data.getAllProjects();
+        String projectName;
+        for (Project project : projects) {
+            projectName = project.getProjectName();
+            projectChoiceBox.getItems().add(projectName);
+        }
+
+        Button closeCourseButton = new Button("Mark Complete");
+        closeCourseButton.setOnAction(event -> {
+            projectCompleter(courseChoiceBox.getValue(),projectChoiceBox.getValue());
+            stage.close();
+        });
+        Button cancel = new Button("Cancel");
+        cancel.setOnAction(event -> stage.close());
+        newRoot.getChildren().addAll(label,courseChoiceBox,closeCourseButton,cancel);
+        Scene newScene = new Scene(newRoot, 400, 400);
+        stage.setScene(newScene);
+        stage.setTitle("Mark Project Complete:");
+        stage.show();
+    }
+
+    /**
+     * complete project, update table
+     * @param courseName name of the course
+     * @param projectName name of the project
+     */
+    private void projectCompleter(String courseName, String projectName){
+        if(!data.checkProjectExistInCourse(courseName,projectName)){
+            errorStatus("Check information entered.");
+            return;
+        }
+        for(Project project: data.getAllProjects()){
+            if(project.getCourseName().equals(courseName)&&project.getProjectName().equals(projectName)){
+                project.setProjectComplete();
+                successStatus(projectName + " for " + courseName+" marked complete.");
+                continue;
+            }
+        }
+        updateCourseList();
     }
 
     /**

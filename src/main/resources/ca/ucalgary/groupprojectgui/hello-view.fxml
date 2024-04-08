@@ -85,6 +85,7 @@
                                                 <Font size="11.0" />
                                             </font>
                                         </CheckBox>
+                              <Button layoutX="31.0" layoutY="294.0" mnemonicParsing="false" onAction="#closeProject" text="Mark Project Complete" />
                                     </children></AnchorPane>
                             </content>
                         </Tab>
