@@ -2,9 +2,11 @@ package ca.ucalgary.groupprojectgui;
 
 import ca.ucalgary.groupprojectgui.objects.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * CPSC 233 W24 ca.ucalgary.groupprojectgui.objects.Project ca.ucalgary.groupprojectgui.Data.java - stores the data to be tracked. (course info, projects, grades, etc.)
@@ -47,7 +49,10 @@ public class Data {
      */
     public boolean storeNewCourse(String courseName, String profName, String profEmail, Double targetGrade) throws Exception {
         // Adds to the list unless the course already exists in the list
+        courseName = courseName.toUpperCase();
         if (!checkExistCourse(courseName)) {
+            courseName.toUpperCase();
+            profEmail.toLowerCase();
             Course course = new Course(courseName, new Professor(profName, profEmail),targetGrade);
             this.courses.add(course); // Added a new course
             Double actualGrade = course.getActualGrade();
@@ -90,9 +95,12 @@ public class Data {
      */
     public  boolean storeNewExam(String courseName, String projectName, double projectWeight, int[] projectDeadline, String location, String reviewTopics) {
         boolean stored;
-        if (!checkProjectExistInCourse(courseName, projectName) || checkExistCourse(courseName)) { // the project is added to projects if it is not already in the ArrayList
+        courseName = courseName.toUpperCase();
+        if(!checkExistCourse(courseName)){
+            stored = false;
+        }
+        else if (!checkProjectExistInCourse(courseName, projectName)) { // the project is added to projects if it is not already in the ArrayList
             Project project = new Exam(courseName, projectName, projectWeight, projectDeadline, location, reviewTopics);
-
             // 2d list with project objects
             projects.add(project);
             getCourse(courseName).addProject(project);
@@ -117,8 +125,11 @@ public class Data {
      */
     public  boolean storeNewAssignment(String courseName, String projectName, double projectWeight, int[] projectDeadline, String specialInstructions) {
         boolean stored;
-        // the project is added to projects if it is not already in the ArrayList
-        if (!checkProjectExistInCourse(courseName, projectName) || checkExistCourse(courseName)) {
+        courseName = courseName.toUpperCase();
+        if(!checkExistCourse(courseName)){
+            stored = false;
+        }
+        else if (!checkProjectExistInCourse(courseName, projectName)) {
             Project project = new Assignment(courseName, projectName, projectWeight, projectDeadline, specialInstructions);
 
             // 2d list with project objects
@@ -268,7 +279,7 @@ public class Data {
      *
      * @return ArrayList of Courses with 'closed' status
      */
-    private  ArrayList<Course> getClosedCourses() {
+    private ArrayList<Course> getClosedCourses() {
         ArrayList<Course> closedCourses = new ArrayList<>();
         for(Course course: this.courses) {
             if (!course.isInProgress()) {
@@ -282,7 +293,7 @@ public class Data {
      * Sorts the entire ArrayList of Projects.
      * @return Sorted list of all the projects (incomplete > complete, chronologically)
      */
-    public  ArrayList<Project> sortProjects() {
+    public ArrayList<Project> sortProjects() {
         // Clone of the list of the projects to return
         ArrayList<Project> sortedProjects = new ArrayList<>();
         // Divide into to groups based on status
@@ -384,7 +395,7 @@ public class Data {
                 return course;
             }
         }
-        System.out.println("Course not found.");
+        System.out.println("courseStatusColumn.");
         return null; // shouldn't happen
     }
 
@@ -448,4 +459,8 @@ public class Data {
         return actualGrades;
     }
 
+
+
+
 }
+

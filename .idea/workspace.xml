@@ -4,17 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b992ee-9616-4c97-8ffa-72d485e94cfd" name="Changes" comment="Course constructor added">
+    <list default="true" id="d5b992ee-9616-4c97-8ffa-72d485e94cfd" name="Changes" comment="close a project">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/GradeModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/Data.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/objects/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/objects/Course.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ca/ucalgary/groupprojectgui/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ca/ucalgary/groupprojectgui/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -24,6 +30,22 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitLabMergeRequestFiltersHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPENED&quot;,
+    &quot;assignee&quot;: {
+      &quot;type&quot;: &quot;org.jetbrains.plugins.gitlab.mergerequest.ui.filters.GitLabMergeRequestsFiltersValue.MergeRequestsMemberFilterValue.MergeRequestsAssigneeFilterValue&quot;,
+      &quot;username&quot;: &quot;utaha.iwai&quot;,
+      &quot;fullname&quot;: &quot;Utaha Iwai&quot;
+    }
+  }
+}</component>
+  <component name="GitLabMergeRequestsSettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;first&quot;: &quot;https://csgit.ucalgary.ca/dipti.kumar/groupprojectgui.git&quot;,
+    &quot;second&quot;: &quot;8f181bb1-ce28-439d-a0af-73b4d108b89e&quot;
+  }
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -31,9 +53,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2enHchGcTAqmbX9CXFAwL4vGRL4" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -42,18 +64,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Application.HelloApplication.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "course-project",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;show-lists&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="ca.ucalgary.groupprojectgui" />
@@ -83,7 +105,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-322ed176" />
       </set>
     </attachedChunks>
   </component>
@@ -128,23 +150,95 @@
       <option name="project" value="LOCAL" />
       <updated>1712538881023</updated>
     </task>
-    <task id="LOCAL-00005" summary="Course constructor added">
+    <task id="LOCAL-00005" summary="start working on course/project list">
       <option name="closed" value="true" />
-      <created>1712545247776</created>
+      <created>1712582362819</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1712545247776</updated>
+      <updated>1712582362819</updated>
     </task>
-    <task id="LOCAL-00006" summary="Course constructor added">
+    <task id="LOCAL-00006" summary="Made CourseController to handle the list">
       <option name="closed" value="true" />
-      <created>1712545328157</created>
+      <created>1712586506625</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1712545328157</updated>
+      <updated>1712586506625</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="made method in Data to return info needed for course table">
+      <option name="closed" value="true" />
+      <created>1712588721909</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1712588721909</updated>
+    </task>
+    <task id="LOCAL-00008" summary=" add a course to the table">
+      <option name="closed" value="true" />
+      <created>1712593600862</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1712593600862</updated>
+    </task>
+    <task id="LOCAL-00009" summary="construct project (havent dealt with locations, special instructions etc)">
+      <option name="closed" value="true" />
+      <created>1712596706564</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1712596706564</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Model for project">
+      <option name="closed" value="true" />
+      <created>1712602919147</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1712602919147</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Model for project">
+      <option name="closed" value="true" />
+      <created>1712602933388</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1712602933388</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Table not updating">
+      <option name="closed" value="true" />
+      <created>1712605351950</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1712605351950</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Table not updating">
+      <option name="closed" value="true" />
+      <created>1712605395867</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1712605395867</updated>
+    </task>
+    <task id="LOCAL-00014" summary="close a course">
+      <option name="closed" value="true" />
+      <created>1712606511300</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1712606511300</updated>
+    </task>
+    <task id="LOCAL-00015" summary="close a project">
+      <option name="closed" value="true" />
+      <created>1712607712363</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1712607712363</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -158,7 +252,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="course-project" />
+                        <option value="origin/master" />
                       </list>
                     </value>
                   </entry>
@@ -176,7 +270,15 @@
     <MESSAGE value="initial commit pt2" />
     <MESSAGE value="UTAHA'S - menu bar options" />
     <MESSAGE value="UTAHA'S - scenebuilder GUI" />
-    <MESSAGE value="Course constructor added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Course constructor added" />
+    <MESSAGE value="start working on course/project list" />
+    <MESSAGE value="Made CourseController to handle the list" />
+    <MESSAGE value="made method in Data to return info needed for course table" />
+    <MESSAGE value=" add a course to the table" />
+    <MESSAGE value="construct project (havent dealt with locations, special instructions etc)" />
+    <MESSAGE value="Model for project" />
+    <MESSAGE value="Table not updating" />
+    <MESSAGE value="close a course" />
+    <MESSAGE value="close a project" />
+    <option name="LAST_COMMIT_MESSAGE" value="close a project" />
   </component>
 </project>
