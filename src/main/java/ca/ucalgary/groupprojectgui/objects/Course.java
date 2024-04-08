@@ -63,6 +63,7 @@ public class Course implements Comparable<Course> {
         return professor.getEmail();
     }
 
+
     /**
      * Getter method for the list of the project
      * @return arrayList of the projects for the course
@@ -70,6 +71,7 @@ public class Course implements Comparable<Course> {
     public ArrayList<Project> getAllProject() {
         return projects;
     }
+
 
     /**
      * Getter method for the status
@@ -209,3 +211,4 @@ public class Course implements Comparable<Course> {
         return Objects.hash(courseName, professor, targetGrade);
     }
 }
+

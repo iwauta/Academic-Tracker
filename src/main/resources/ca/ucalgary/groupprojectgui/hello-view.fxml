@@ -16,28 +16,28 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="448.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.ucalgary.groupprojectgui.HelloController">
     <children>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#load" text="Load" />
-                  <MenuItem mnemonicParsing="false" onAction="#save" text="Save" />
-                  <MenuItem mnemonicParsing="false" onAction="#saveAs" text="Save As" />
-              <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#load" text="Load" />
+                        <MenuItem mnemonicParsing="false" onAction="#save" text="Save" />
+                        <MenuItem mnemonicParsing="false" onAction="#saveAs" text="Save As" />
+                        <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
 
         <AnchorPane prefHeight="425.0" prefWidth="625.0">
             <children>
@@ -47,17 +47,17 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="334.0" prefWidth="598.0">
                                     <children>
-                                        <TableView fx:id="Table" layoutX="20.0" layoutY="14.0" prefHeight="285.0" prefWidth="613.0">
+                                        <TableView fx:id="courseTableView" layoutX="20.0" layoutY="14.0" prefHeight="285.0" prefWidth="613.0">
                                             <columns>
                                                 <TableColumn fx:id="courseNameColumn" prefWidth="121.0" text="Course Name" />
                                                 <TableColumn fx:id="profNameColumn" prefWidth="172.0" text="Professor Name" />
-                                                <TableColumn fx:id="profEmailColumn" prefWidth="176.0" text="Professor Email" />
-                                                <TableColumn fx:id="targetGradeColumn" prefWidth="106.0" text="Target Grade" />
+                                                <TableColumn fx:id="profEmailColumn" prefWidth="203.0" text="Professor Email" />
+                                                <TableColumn fx:id="inProgressColumn" prefWidth="116.0" text="Status" />
                                             </columns>
                                         </TableView>
                                         <Button defaultButton="true" layoutX="283.0" layoutY="307.0" mnemonicParsing="false" onAction="#addCourse" text="Add a Course" />
-                                        <Button layoutX="66.0" layoutY="307.0" mnemonicParsing="false" text="Close a Course" />
-                                        <CheckBox layoutX="452.0" layoutY="312.0" mnemonicParsing="false" text="Show In-Progress Courses Only">
+                                        <Button layoutX="66.0" layoutY="307.0" mnemonicParsing="false" onAction="#closeCourse" text="Close a Course" />
+                                        <CheckBox fx:id="inProgressOnlyCheckBox" layoutX="452.0" layoutY="312.0" mnemonicParsing="false" onAction="#checkInProgressOnly" text="Show In-Progress Courses Only">
                                             <font>
                                                 <Font size="11.0" />
                                             </font>
@@ -69,21 +69,40 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="405.0" prefWidth="661.0">
                                     <children>
-                                        <TableView layoutX="26.0" layoutY="14.0" prefHeight="318.0" prefWidth="565.0">
+                                        <TableView fx:id="projectTableView" layoutX="14.0" layoutY="14.0" prefHeight="261.0" prefWidth="626.0">
                                             <columns>
-                                                <TableColumn prefWidth="90.39995956420898" text="Project Type" />
-                                                <TableColumn prefWidth="115.20001220703125" text="Name" />
-                                                <TableColumn prefWidth="95.99996948242188" text="Weight" />
-                                                <TableColumn prefWidth="152.7999267578125" text="Deadline" />
-                                                <TableColumn prefWidth="68.79998779296875" text="Complete?" />
+                                                <TableColumn fx:id="projectTypeColumn" prefWidth="66.5" text="Type" />
+                                                <TableColumn fx:id="projectNameColumn" prefWidth="140.5" text="Name" />
+                                                <TableColumn fx:id="projectWeightColumn" prefWidth="56.0" text="Weight" />
+                                                <TableColumn fx:id="projectDeadlineColumn" prefWidth="127.0" text="Deadline" />
+                                                <TableColumn fx:id="projectPendingColumn" minWidth="0.0" prefWidth="118.0" text="Status" />
+                                    <TableColumn fx:id="projectSpecialColumn" minWidth="0.0" prefWidth="120.0" text="Special" />
                                             </columns>
                                         </TableView>
+                                        <Button defaultButton="true" layoutX="283.0" layoutY="294.0" mnemonicParsing="false" onAction="#addProject" text="Add a Project" />
+                                        <CheckBox fx:id="pendingOnlyCheckBox" layoutX="460.0" layoutY="299.0" mnemonicParsing="false" onAction="#checkPendingOnly" text="Show Incomplete Projects Only">
+                                            <font>
+                                                <Font size="11.0" />
+                                            </font>
+                                        </CheckBox>
+                              <Button layoutX="31.0" layoutY="294.0" mnemonicParsing="false" onAction="#closeProject" text="Mark Project Complete" />
                                     </children></AnchorPane>
                             </content>
                         </Tab>
                         <Tab text="Grades">
                             <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="gradeTableView" layoutX="117.0" layoutY="27.0" prefHeight="253.0" prefWidth="419.0">
+                                <columns>
+                                  <TableColumn fx:id="gradeCourseNameColumn" prefWidth="149.0" text="Course Name" />
+                                  <TableColumn fx:id="targetGradeColumn" prefWidth="138.0" text="Target " />
+                                    <TableColumn fx:id="actualGradeColumn" prefWidth="131.0" text="Actual" />
+                                </columns>
+                              </TableView>
+                              <CheckBox fx:id="gradeInProgressOnlyCheckBox" layoutX="394.0" layoutY="280.0" mnemonicParsing="false" prefHeight="5.0" prefWidth="204.0" text="Show In-Progress Courses Only" />
+                              <Button layoutX="306.0" layoutY="298.0" mnemonicParsing="false" onAction="#refreshGradeTable" text="Refresh" />
+                           </children></AnchorPane>
                             </content>
                         </Tab>
                     </tabs>
@@ -92,31 +111,31 @@
         </AnchorPane>
 
     </children>
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#load" text="Load" />
-                  <MenuItem mnemonicParsing="false" onAction="#save" text="Save" />
-                  <MenuItem mnemonicParsing="false" onAction="#saveAs" text="Save As" />
-              <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
-   <bottom>
-          <Label fx:id="status" prefHeight="18.0" prefWidth="618.0" text="   " BorderPane.alignment="CENTER" />
-   </bottom>
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#load" text="Load" />
+                        <MenuItem mnemonicParsing="false" onAction="#save" text="Save" />
+                        <MenuItem mnemonicParsing="false" onAction="#saveAs" text="Save As" />
+                        <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <bottom>
+        <Label fx:id="status" prefHeight="47.0" prefWidth="464.0" text="    " BorderPane.alignment="CENTER" />
+    </bottom>
 </BorderPane>

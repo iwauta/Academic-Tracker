@@ -44,6 +44,11 @@ public class Project implements Comparable<Project>{
         return projectDeadline;
     }
 
+    public String deadlineToString(){
+        String deadline = String.format("%d/%d/%d",projectDeadline[INDEX_DAY],projectDeadline[INDEX_MONTH],projectDeadline[INDEX_YEAR]);
+        return deadline;
+    }
+
     public boolean isProjectComplete() {
         return projectCompletion;
     }
