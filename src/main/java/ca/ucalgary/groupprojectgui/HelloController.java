@@ -2,31 +2,162 @@ package ca.ucalgary.groupprojectgui;
 
 import ca.ucalgary.groupprojectgui.util.FileLoader;
 import ca.ucalgary.groupprojectgui.util.FileSaver;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 
 public class HelloController {
 
-    Data data;
+    Data data = new Data();
 
     private String defaultDirectory = "data.csv";
 
     @FXML
     private Label status;
 
+    private TextField courseNameTF = new TextField();
+    private TextField profNameTF = new TextField();
+
+    private TextField profEmailTF = new TextField();
+    private TextField targetGradeTF = new TextField();
+
+
     @FXML
     public void initialize() {
     }
 
+
+    /**
+     * Constructs a course entered by the user
+     * @param actionEvent user selects "Add Course"
+     */
+    @FXML
+    void addCourse(ActionEvent actionEvent) {
+        // new scene opens to construct a course
+        Stage stage = new Stage();
+        VBox newRoot = new VBox();
+
+        courseNameTF.setPromptText("Enter the course name:");
+
+        profNameTF.setPromptText("Enter the professor's name:");
+
+        profEmailTF.setPromptText("Enter the professor's email address (ending in @ucalgary.ca):");
+
+        targetGradeTF.setPromptText("Enter you target grade for this course:");
+
+        Scene newScene = new Scene(newRoot, 400, 400);
+
+        stage.setScene(newScene);
+        stage.setTitle("Add a course:");
+        stage.show();
+
+        Button add = new Button("Add Course");
+
+        add.setOnAction(event -> constructCourse()); // course is constructing using user input
+
+        Button cancel = new Button("Cancel");
+        cancel.setOnAction(event -> stage.close()); // cancel exists course constructor
+
+        newRoot.getChildren().addAll(courseNameTF, profNameTF, profEmailTF, targetGradeTF, add, cancel);
+
+    }
+
+    private void constructCourse() {
+        String courseName = courseNameTF.getText();
+        String profName = profNameTF.getText();
+        String profEmail = profEmailTF.getText();
+        String target = targetGradeTF.getText();
+        double targetGrade;
+
+        if (courseName.isEmpty() || profName.isEmpty() || target.isEmpty()) {
+            errorStatus("Invalid input. Make sure no fields are empty.");
+            return;
+        } else if (!profEmail.endsWith("@ucalgary.ca")) {
+            errorStatus("Invalid email address.");
+            return;
+        } else if (data.checkExistCourse(courseName)) {
+            errorStatus("Invalid email address.");
+            return;
+        }
+
+        try {
+            targetGrade = Double.parseDouble(target);
+        } catch (NumberFormatException e) {
+            errorStatus("Could not parse integer target grade.");
+            return;
+        }
+
+        if (targetGrade < 0 || targetGrade > 100) {
+            errorStatus("Invalid target grade.");
+            return;
+        }
+
+        try {
+            data.storeNewCourse(courseName, profName, profEmail, targetGrade);
+            successStatus("Course stored.");
+        } catch (Exception e) {
+            errorStatus("Could not store course");
+        }
+
+    }
+
+    /**
+     * Shows red error message
+     * @param message Error message to print.
+     */
+    private void errorStatus(String message){
+        status.setTextFill(Color.RED);
+        status.setText("Error! " + message);
+
+        // clear the error message after 3 seconds
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
+            status.setText(""); // Clear the error message
+        }));
+        timeline.play();
+
+    }
+
+    /**
+     * Shows green success message
+     * @param message Success message to print.
+     */
+    private void successStatus(String message){
+        status.setTextFill(Color.RED);
+        status.setText("Success! " + message);
+
+        // clear the error message after 3 seconds
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
+            status.setText(""); // Clear the error message
+        }));
+        timeline.play();
+
+    }
+
+    /**
+     * Shows black message
+     * @param message Message to print.
+     */
+    private void neutralStatus(String message){
+        status.setTextFill(Color.BLACK);
+        status.setText(message);
+
+        // clear the error message after 3 seconds
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
+            status.setText(""); // Clear the error message
+        }));
+        timeline.play();
+    }
 
 
     /**
@@ -42,17 +173,14 @@ public class HelloController {
             // handle selected file
             try {
                 data = FileLoader.load(selectedFile);
-                status.setTextFill(Color.GREEN);
-                status.setText("Loaded file " + selectedFile.getName());
+                successStatus("Loaded file " + selectedFile.getName());
 
             } catch (Exception e) { // Invalid selection
-                status.setTextFill(Color.RED);
-                status.setText("Error! Couldn't save data to " + selectedFile.getName());
+                errorStatus("Couldn't save data to " + selectedFile.getName());
             }
         } else {
             // User canceled the file selection
-            status.setTextFill(Color.BLACK);
-            status.setText("Canceled file selection.");
+            neutralStatus("File selection cancelled");
         }
     }
 

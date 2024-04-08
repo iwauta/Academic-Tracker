@@ -38,6 +38,7 @@ public class FileLoader {
                 double targetGrade = Double.parseDouble(parts[3]);
                 boolean inProgress = Boolean.parseBoolean(parts[4]);
 
+
                 boolean b = data.storeNewCourse(courseName, profName, profEmail, targetGrade);
 
                 if (!b) {
@@ -89,6 +90,8 @@ public class FileLoader {
         } catch (IOException ioe){
             System.err.println("Exception");
             return null;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
         return data;

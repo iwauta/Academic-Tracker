@@ -206,14 +206,18 @@ public class Menu {
      * prof, email address (@ucalgary.ca).) The information gets stored in data.java.
      */
     private static void menuEnterNewCourse() {
-        boolean success;
+        boolean success = false;
         do{
             System.out.println("Enter information about a new course!");
             String courseName = getCourseName();
             String profName = getProfName();
             String profEmail = getProfEmail();
             double targetGrade = getTargetGrade();
-            success = data.storeNewCourse(courseName, profName, profEmail,targetGrade);
+            try {
+                success = data.storeNewCourse(courseName, profName, profEmail, targetGrade);
+            } catch (Exception e) {
+                System.out.println("Could not store course");
+            }
             if(!success){
                 System.out.println("Course already exists (course name is tracked already)!\nTry again");
             }

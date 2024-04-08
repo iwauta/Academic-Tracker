@@ -45,7 +45,7 @@ public class Data {
      * @param profEmail @ucalgary.ca email address of the professor of the added course
      * @return true (added successfully) or false (otherwise)
      */
-    public  boolean storeNewCourse(String courseName, String profName, String profEmail, Double targetGrade) {
+    public boolean storeNewCourse(String courseName, String profName, String profEmail, Double targetGrade) throws Exception {
         // Adds to the list unless the course already exists in the list
         if (!checkExistCourse(courseName)) {
             Course course = new Course(courseName, new Professor(profName, profEmail),targetGrade);
@@ -53,11 +53,12 @@ public class Data {
             Double actualGrade = course.getActualGrade();
             targetGrades.put(course, targetGrade); // Store targetGrade for this course
             actualGrades.put(course, actualGrade); // store actual grade for this course
-            System.out.printf("Stored a new course %s!%n", courseName);
+//            System.out.printf("Stored a new course %s!%n", courseName);
             return true;
         } else { // Failed to add the course (the course already exists)
-            System.out.printf("Error in storing course %s. Check information entered.%n", courseName);
-            return false;
+            throw new Exception("Could not store course");
+//            System.out.printf("Error in storing course %s. Check information entered.%n", courseName);
+//            return false;
         }
     }
 
