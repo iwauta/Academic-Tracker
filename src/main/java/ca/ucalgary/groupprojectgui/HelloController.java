@@ -163,6 +163,51 @@ public class HelloController {
         stage.show();
     }
 
+    @FXML
+    void closeCourse(ActionEvent actionEvent){
+        Stage stage = new Stage();
+        VBox newRoot = new VBox();
+
+        Label label = new Label("Course to close:");
+        ChoiceBox<String> courseChoiceBox = new ChoiceBox();
+        // select course
+        ArrayList<Course> courses = data.getInProgressCourses();
+        String courseName;
+        for (Course course : courses) {
+            if (course.isInProgress()) {
+                courseName = course.getCourseName().toUpperCase();
+                courseChoiceBox.getItems().add(courseName);
+            }
+        }
+        Button closeCourseButton = new Button("Close");
+        closeCourseButton.setOnAction(event -> {
+            courseClosure(courseChoiceBox.getValue());
+            stage.close();
+        });
+        Button cancel = new Button("Cancel");
+        cancel.setOnAction(event -> stage.close());
+        newRoot.getChildren().addAll(label,courseChoiceBox,closeCourseButton,cancel);
+        Scene newScene = new Scene(newRoot, 400, 400);
+        stage.setScene(newScene);
+        stage.setTitle("Close a course:");
+        stage.show();
+    }
+
+    /**
+     * Close a course
+     * @param courseName name of the course to close
+     */
+    private void courseClosure(String courseName){
+        for(Course course: data.getAllCourses()){
+            if(course.getCourseName().equals(courseName)){
+                course.closeCourse();
+                successStatus(courseName+" closed.");
+                continue;
+            }
+        }
+        updateCourseList();
+    }
+
     /**
      * Constructs a course object based on user input; update status based on errors if there was any.
      * @return true if adding a course was successful or false otherwise
@@ -406,7 +451,9 @@ public class HelloController {
         }
     }
 
-
+    /**
+     * Updates the PojectModel list
+     */
     private ArrayList<ProjectModel> generateProjectTableContents(boolean pendingOnly){
         ArrayList<Project> projects = data.sortProjects();
         // ArrayList of ProjectModels to return
@@ -463,6 +510,8 @@ public class HelloController {
         }
         // Add all the items to the TableView
         projectTableView.getItems().addAll(projectData);
+        // Refresh the TableView
+        projectTableView.refresh();
     }
 
     /**

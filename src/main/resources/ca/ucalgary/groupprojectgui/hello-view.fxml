@@ -56,7 +56,7 @@
                                             </columns>
                                         </TableView>
                                         <Button defaultButton="true" layoutX="283.0" layoutY="307.0" mnemonicParsing="false" onAction="#addCourse" text="Add a Course" />
-                                        <Button layoutX="66.0" layoutY="307.0" mnemonicParsing="false" text="Close a Course" />
+                                        <Button layoutX="66.0" layoutY="307.0" mnemonicParsing="false" onAction="#closeCourse" text="Close a Course" />
                                         <CheckBox fx:id="inProgressOnlyCheckBox" layoutX="452.0" layoutY="312.0" mnemonicParsing="false" onAction="#checkInProgressOnly" text="Show In-Progress Courses Only">
                                             <font>
                                                 <Font size="11.0" />
@@ -71,12 +71,12 @@
                                     <children>
                                         <TableView fx:id="projectTableView" layoutX="14.0" layoutY="14.0" prefHeight="261.0" prefWidth="626.0">
                                             <columns>
-                                                <TableColumn fx:id="projectTypeColumn" prefWidth="49.5" text="Type" />
-                                                <TableColumn fx:id="projectNameColumn" prefWidth="144.5" text="Name" />
-                                                <TableColumn fx:id="projectWeightColumn" prefWidth="51.0" text="Weight" />
-                                                <TableColumn fx:id="projectDeadlineColumn" prefWidth="128.0" text="Deadline" />
-                                                <TableColumn fx:id="projectPendingColumn" minWidth="0.0" prefWidth="110.0" text="Status" />
-                                    <TableColumn fx:id="projectSpecialColumn" minWidth="0.0" prefWidth="145.0" text="Special" />
+                                                <TableColumn fx:id="projectTypeColumn" prefWidth="66.5" text="Type" />
+                                                <TableColumn fx:id="projectNameColumn" prefWidth="140.5" text="Name" />
+                                                <TableColumn fx:id="projectWeightColumn" prefWidth="56.0" text="Weight" />
+                                                <TableColumn fx:id="projectDeadlineColumn" prefWidth="127.0" text="Deadline" />
+                                                <TableColumn fx:id="projectPendingColumn" minWidth="0.0" prefWidth="118.0" text="Status" />
+                                    <TableColumn fx:id="projectSpecialColumn" minWidth="0.0" prefWidth="120.0" text="Special" />
                                             </columns>
                                         </TableView>
                                         <Button defaultButton="true" layoutX="283.0" layoutY="294.0" mnemonicParsing="false" onAction="#addProject" text="Add a Project" />
