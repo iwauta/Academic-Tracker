@@ -133,6 +133,13 @@ public class Course implements Comparable<Course> {
     }
 
     /**
+     * set course status to In-Progress
+     */
+    public void setInProgress() {
+        this.inProgress = true;
+    }
+
+    /**
      * Sets a target grade for the course.
      * @param targetGrade targeted grade for the course
      */

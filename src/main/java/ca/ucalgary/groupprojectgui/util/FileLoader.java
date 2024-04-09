@@ -47,6 +47,8 @@ public class FileLoader {
 
                 if (!inProgress) {
                     data.getCourse(courseName).closeCourse();
+                } else{
+                    data.getCourse(courseName).setInProgress();
                 }
 
             }

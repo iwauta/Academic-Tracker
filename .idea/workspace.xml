@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5b992ee-9616-4c97-8ffa-72d485e94cfd" name="Changes" comment="close a project">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/GradeModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/GradeModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/GradeModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/ProjectModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/ProjectModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/objects/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/objects/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/util/FileLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/util/FileLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/util/FileSaver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/util/FileSaver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ca/ucalgary/groupprojectgui/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ca/ucalgary/groupprojectgui/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="show-lists" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -64,18 +69,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;show-lists&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.HelloApplication.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "project-grade-table-fix",
+    "kotlin-language-version-configured": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="ca.ucalgary.groupprojectgui" />
@@ -97,6 +102,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.HelloApplication" />
       </list>
