@@ -190,7 +190,7 @@ public class HelloController {
 
     /**
      * Constructs a course object based on user input; update status based on errors if there was any.
-     * @return true if adding a course was successful or false otherwis
+     * @return true if adding a course was successful or false otherwise
      */
     private boolean constructCourse(String courseName, String profName, String profEmail, String targetGrade) {
         final int MIN_LENGTH = 6;
@@ -395,7 +395,7 @@ public class HelloController {
         projectReviewTopicsTextFiled.setPromptText("Enter the topics of the exam:");
 
         TextField projectSpecialInstructionsTextFiled = new TextField();
-        projectSpecialInstructionsTextFiled.setPromptText("Enter the special instructions of the exam:");
+        projectSpecialInstructionsTextFiled.setPromptText("Enter the special instructions of the assignment:");
 
         Button add = new Button("Add Project");
         add.setOnAction(event -> {
@@ -551,13 +551,14 @@ public class HelloController {
     }
 
     /**
-     * Updates the PojectModel list
+     * Updates the ProjectModel list
      */
     private ArrayList<ProjectModel> generateProjectTableContents(boolean pendingOnly){
         ArrayList<Project> projects = data.sortProjects();
         // ArrayList of ProjectModels to return
         ArrayList<ProjectModel> projectModels = new ArrayList<>();
         if(pendingOnly) {
+            System.out.println("pending only True");
             ArrayList<Project> pendingProjects = new ArrayList<>();
             for (Project project : projects) {
                 if (project.isProjectComplete()) {
