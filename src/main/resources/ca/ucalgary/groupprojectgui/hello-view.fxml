@@ -71,12 +71,12 @@
                                     <children>
                                         <TableView fx:id="projectTableView" layoutX="14.0" layoutY="14.0" prefHeight="261.0" prefWidth="626.0">
                                             <columns>
-                                                <TableColumn fx:id="projectTypeColumn" prefWidth="66.5" text="Type" />
-                                                <TableColumn fx:id="projectNameColumn" prefWidth="140.5" text="Name" />
-                                                <TableColumn fx:id="projectWeightColumn" prefWidth="56.0" text="Weight" />
-                                                <TableColumn fx:id="projectDeadlineColumn" prefWidth="127.0" text="Deadline" />
+                                                <TableColumn fx:id="projectTypeColumn" prefWidth="79.5" text="Type" />
+                                                <TableColumn fx:id="projectNameColumn" prefWidth="127.5" text="Name" />
+                                                <TableColumn fx:id="projectWeightColumn" prefWidth="62.0" text="Weight" />
+                                                <TableColumn fx:id="projectDeadlineColumn" prefWidth="121.0" text="Deadline" />
                                                 <TableColumn fx:id="projectPendingColumn" minWidth="0.0" prefWidth="118.0" text="Status" />
-                                    <TableColumn fx:id="projectSpecialColumn" minWidth="0.0" prefWidth="120.0" text="Special" />
+                                                <TableColumn fx:id="projectSpecialColumn" minWidth="0.0" prefWidth="120.0" text="Special" />
                                             </columns>
                                         </TableView>
                                         <Button defaultButton="true" layoutX="283.0" layoutY="294.0" mnemonicParsing="false" onAction="#addProject" text="Add a Project" />
@@ -85,24 +85,25 @@
                                                 <Font size="11.0" />
                                             </font>
                                         </CheckBox>
-                              <Button layoutX="31.0" layoutY="294.0" mnemonicParsing="false" onAction="#closeProject" text="Mark Project Complete" />
+                                        <Button layoutX="31.0" layoutY="294.0" mnemonicParsing="false" onAction="#closeProject" text="Mark Project Complete" />
                                     </children></AnchorPane>
                             </content>
                         </Tab>
                         <Tab text="Grades">
                             <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TableView fx:id="gradeTableView" layoutX="117.0" layoutY="27.0" prefHeight="253.0" prefWidth="419.0">
-                                <columns>
-                                  <TableColumn fx:id="gradeCourseNameColumn" prefWidth="149.0" text="Course Name" />
-                                  <TableColumn fx:id="targetGradeColumn" prefWidth="138.0" text="Target " />
-                                    <TableColumn fx:id="actualGradeColumn" prefWidth="131.0" text="Actual" />
-                                </columns>
-                              </TableView>
-                              <CheckBox fx:id="gradeInProgressOnlyCheckBox" layoutX="394.0" layoutY="280.0" mnemonicParsing="false" prefHeight="5.0" prefWidth="204.0" text="Show In-Progress Courses Only" />
-                              <Button layoutX="306.0" layoutY="298.0" mnemonicParsing="false" onAction="#refreshGradeTable" text="Refresh" />
-                           </children></AnchorPane>
+                                    <children>
+                                        <TableView fx:id="gradeTableView" layoutX="117.0" layoutY="27.0" prefHeight="253.0" prefWidth="419.0">
+                                            <columns>
+                                                <TableColumn fx:id="gradeCourseNameColumn" prefWidth="149.0" text="Course Name" />
+                                                <TableColumn fx:id="targetGradeColumn" prefWidth="138.0" text="Target " />
+                                                <TableColumn fx:id="actualGradeColumn" prefWidth="131.0" text="Actual" />
+                                            </columns>
+                                        </TableView>
+                                        <CheckBox fx:id="gradeInProgressOnlyCheckBox" layoutX="394.0" layoutY="280.0" mnemonicParsing="false" prefHeight="5.0" prefWidth="204.0" text="Show In-Progress Courses Only" />
+                                        <Button layoutX="306.0" layoutY="298.0" mnemonicParsing="false" onAction="#refreshGradeTable" text="Refresh" />
+                                    </children></AnchorPane>
                             </content>
                         </Tab>
                     </tabs>

@@ -23,7 +23,7 @@ public class FileSaver {
         try (FileWriter fw = new FileWriter(file)) {
             fw.write("Courses\n");
             for (Course course : data.getAllCourses()) {
-                fw.write(String.format("%s, %s, %s, %s, %s\n", course.getCourseName(), course.getProfName(), course.getProfEmail(), course.getTargetGrade(), course.isInProgress()));
+                fw.write(String.format("%s, %s, %s, %s, %s\n", course.getCourseName(), course.getProfName(), course.getProfEmail(), course.getTargetGrade(), Boolean.toString(course.isInProgress())));
 
             }
             fw.write("Projects\n");
