@@ -589,7 +589,7 @@ public class HelloController {
                 type = "A";
                 special = String.format("Instruction: %s", ((Assignment) project).getSpecialInstructions());
             }
-            ProjectModel projectModel = new ProjectModel(projectName,courseName,weight,deadline,type,special,pending);
+            ProjectModel projectModel = new ProjectModel(projectName, courseName, weight, deadline, type, special, pending);
             projectModels.add(projectModel);
         }
         return projectModels;
