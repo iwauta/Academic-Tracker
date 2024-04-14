@@ -13,8 +13,8 @@ public class ProjectModel {
     private String projectSpecial;
     private String projectType;
 
-    public  ProjectModel(String projectName, String courseName, String weight, String deadline, String projectType,String special,String pending){
-        this.projectName = String.format("%s (%s)",projectName,courseName);
+    public  ProjectModel(String projectName, String courseName, String weight, String deadline, String projectType, String special, String pending){
+        this.projectName = String.format("%s (%s)", projectName, courseName);
         this.projectWeight = weight;
         this.projectDeadline = deadline;
         this.projectType = projectType;

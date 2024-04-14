@@ -403,6 +403,7 @@ public class HelloController {
             if (success) {
                 // Successfully added a project, update the list
                 updateProjectList();
+                System.out.println("projectlistupdtaed");
                 stage.close();
             }
         });
@@ -554,18 +555,26 @@ public class HelloController {
      * Updates the ProjectModel list
      */
     private ArrayList<ProjectModel> generateProjectTableContents(boolean pendingOnly){
-        ArrayList<Project> projects = data.sortProjects();
+        System.out.println("generating table project");
+        ArrayList<Project> projects = new ArrayList<>();
         // ArrayList of ProjectModels to return
         ArrayList<ProjectModel> projectModels = new ArrayList<>();
-        if(pendingOnly) {
+        if (pendingOnly) {
             System.out.println("pending only True");
-            ArrayList<Project> pendingProjects = new ArrayList<>();
-            for (Project project : projects) {
-                if (project.isProjectComplete()) {
-                    pendingProjects.add(project);
+//            ArrayList<Project> pendingProjects = new ArrayList<>();
+            for (Project project : data.sortProjects()) {
+                if (!project.isProjectComplete()) {
+                    projects.add(project);
+                    System.out.println("added project to projects");
                 }
             }
-            projects = pendingProjects;
+        } else {
+            System.out.println("pending only false");
+            for (Project project : data.sortProjects()) {
+                projects.add(project);
+                System.out.println("added project to projects");
+
+            }
         }
 
         // Add to the list to return
@@ -591,6 +600,7 @@ public class HelloController {
             }
             ProjectModel projectModel = new ProjectModel(projectName, courseName, weight, deadline, type, special, pending);
             projectModels.add(projectModel);
+            System.out.println("projectmodel created");
         }
         return projectModels;
     }
