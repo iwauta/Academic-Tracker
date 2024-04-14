@@ -5,23 +5,28 @@ package ca.ucalgary.groupprojectgui.objects; /**
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Course.java - Represents Course object.
+ *
+ * @author Utaha Iwai, Dipti Kumar
+ * @tutorial T09
+ * @email utaha.iwai@ucalgary.ca, dipti.kumar@ucalgary.ca
+ */
 public class Course implements Comparable<Course> {
 
     // Properties
-    private String courseName;              // name of the course
-    private Professor professor;            // ca.ucalgary.groupprojectgui.objects.Professor otherect (contains info)
-    private ArrayList<Project> projects;    // ArrayList of ca.ucalgary.groupprojectgui.objects.Project otherects
-    private Double targetGrade,actualGrade; // target/actual grade for the course
-    private boolean inProgress;             // status of the course (true - in-progress, false - withdrawn/closed)
+    private String courseName;
+    private Professor professor; // Professor object
+    private ArrayList<Project> projects;    // ArrayList of Project objects
+    private Double targetGrade,actualGrade;
+    private boolean inProgress; // status of the course (true - in-progress, false - withdrawn/closed)
 
     // Static constants
     // ca.ucalgary.groupprojectgui.objects.Course info formatter
     public static final String COURSE_FORMAT = "%-11s    %-20s   %-25s    %-17s%n";
 
-
-    // Constructor...
     /**
-     * Constructor method for ca.ucalgary.groupprojectgui.objects.Course otherect. Initializes properties.
+     * Constructor
      *
      * @param courseName name of the course
      * @param professor professor for this course
@@ -37,7 +42,7 @@ public class Course implements Comparable<Course> {
     }
 
 
-    // Getter methods...
+    /* Getters... /
 
     /**
      * Getter method for the name of the course
@@ -63,7 +68,6 @@ public class Course implements Comparable<Course> {
         return professor.getEmail();
     }
 
-
     /**
      * Getter method for the list of the project
      * @return arrayList of the projects for the course
@@ -71,7 +75,6 @@ public class Course implements Comparable<Course> {
     public ArrayList<Project> getAllProject() {
         return projects;
     }
-
 
     /**
      * Getter method for the status
@@ -99,7 +102,7 @@ public class Course implements Comparable<Course> {
     }
 
 
-    // Setter methods...
+    /* Setters... /
 
     /**
      * Setter method for courseName
@@ -115,14 +118,6 @@ public class Course implements Comparable<Course> {
      */
     public void setProfessor(Professor professor){
         this.professor = professor;
-    }
-
-    /**
-     * Adds a project to the course
-     * @param project ca.ucalgary.groupprojectgui.objects.Project otherect to add to the list
-     */
-    public void addProject(Project project){
-        this.projects.add(project);
     }
 
     /**
@@ -147,18 +142,42 @@ public class Course implements Comparable<Course> {
         this.targetGrade = targetGrade;
     }
 
-///////////// TO DO//////////////////////////////////
+
+    /* Add/remove projects... */
+
+    /**
+     * Adds a project to the course
+     * @param project Project object to add to the course
+     */
+    public void addProject(Project project){
+        this.projects.add(project);
+    }
+
+    /**
+     * Removes a project to the course
+     * @param project object to remove from the course
+     */
+    public void removeProject(Project project){
+        this.projects.remove(project);
+    }
+
+
+    /* Calculate grade... */
+
     /**
      * Calculates the actual grade for the course using project data. (Called in getActualGrade)
      */
     public void calculateActualGrade() {
+        actualGrade = (double) 0; // reset grade
+        double divisor = 100.0;
         for(Project project: projects){
-            actualGrade += project.getProjectWeight()*project.getProjectGrade();
+            // get proportion of the project in the course's final grade
+            double weight = (project.getProjectWeight()) / divisor;
+            actualGrade += weight * project.getProjectGrade();
         }
     }
 
-
-    // Overrode methods...
+    /* Override from Object... */
 
     /**
      * Represents ca.ucalgary.groupprojectgui.objects.Course otherect as String (Formatted: "COURSE_NAME", "PROF_NAME","PROF_EMAIL","STATUS"
@@ -187,7 +206,6 @@ public class Course implements Comparable<Course> {
     public int compareTo(Course other) {
         return this.courseName.compareTo(other.courseName);
     }
-
 
     /**
      * Deep equals. compare contents of the object

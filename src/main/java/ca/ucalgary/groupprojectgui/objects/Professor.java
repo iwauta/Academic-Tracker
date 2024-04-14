@@ -3,7 +3,11 @@ package ca.ucalgary.groupprojectgui.objects;
 import java.util.Objects;
 
 /**
- * ca.ucalgary.groupprojectgui.objects.Professor.java - Represents a ca.ucalgary.groupprojectgui.objects.Professor otherect
+ * Professor.java - Represents Professor object
+ *
+ * @author Utaha Iwai, Dipti Kumar
+ * @tutorial T09
+ * @email utaha.iwai@ucalgary.ca, dipti.kumar@ucalgary.ca
  */
 public class Professor {
 
@@ -11,12 +15,18 @@ public class Professor {
     private String name;
     private String email;
 
+    /**
+     * Constructor
+     * @param name name of the professor
+     * @param email email (@ucalgary) of the professor
+     */
     public Professor(String name, String email){
         this.name = name;
         this.email = email;
     }
 
-    // Getter methods...
+
+    /* Getters...*/
 
     /**
      * Getter method for name
@@ -35,7 +45,7 @@ public class Professor {
     }
 
 
-    // Setter methods...
+    /* Setters...*/
 
     /**
      * Sets the name of the professor
@@ -53,6 +63,8 @@ public class Professor {
         this.email = email;
     }
 
+
+    /* Override from Object... */
 
     /**
      * Deep equals. compare contents of the object

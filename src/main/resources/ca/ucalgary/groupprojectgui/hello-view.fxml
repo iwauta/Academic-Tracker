@@ -71,12 +71,12 @@
                                     <children>
                                         <TableView fx:id="projectTableView" layoutX="14.0" layoutY="14.0" prefHeight="261.0" prefWidth="626.0">
                                             <columns>
-                                                <TableColumn fx:id="projectTypeColumn" prefWidth="79.5" text="Type" />
-                                                <TableColumn fx:id="projectNameColumn" prefWidth="127.5" text="Name" />
-                                                <TableColumn fx:id="projectWeightColumn" prefWidth="62.0" text="Weight" />
-                                                <TableColumn fx:id="projectDeadlineColumn" prefWidth="121.0" text="Deadline" />
-                                                <TableColumn fx:id="projectPendingColumn" minWidth="0.0" prefWidth="118.0" text="Status" />
-                                                <TableColumn fx:id="projectSpecialColumn" minWidth="0.0" prefWidth="120.0" text="Special" />
+                                                <TableColumn fx:id="projectTypeColumn" prefWidth="42.5" text="Type" />
+                                                <TableColumn fx:id="projectNameColumn" prefWidth="150.5" text="Name" />
+                                                <TableColumn fx:id="projectWeightColumn" prefWidth="60.0" text="Weight" />
+                                                <TableColumn fx:id="projectDeadlineColumn" prefWidth="120.0" text="Deadline" />
+                                                <TableColumn fx:id="projectSpecialColumn" minWidth="0.0" prefWidth="135.0" text="Special" />
+                                                <TableColumn fx:id="projectStatusColumn" minWidth="0.0" prefWidth="120.0" text="Status" />
                                             </columns>
                                         </TableView>
                                         <Button defaultButton="true" layoutX="283.0" layoutY="294.0" mnemonicParsing="false" onAction="#addProject" text="Add a Project" />
