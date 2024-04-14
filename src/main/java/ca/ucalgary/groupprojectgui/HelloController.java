@@ -584,7 +584,7 @@ public class HelloController {
             // projectName for the table ('project (course)')
             String projectNameWithCourseName = String.format("%s (%s)",projectName,courseName);
             String weight = String.valueOf(project.getProjectWeight());
-            String deadline = project.deadlineToString();
+            String deadline = project.deadlineToString(); // 'dd/mm/yyyy'
             String type = "";
             String special= "";
             String status;
@@ -597,7 +597,7 @@ public class HelloController {
             // formatting special instructions / location / exam topics based on project type
             if (project instanceof Exam){
                 type = "E";
-                special = String.format("@%s, Topics: %s", ((Exam) project).getLocation(), ((Exam) project).getReviewTopics());
+                special = String.format("Location: %s, Topics: %s", ((Exam) project).getLocation(), ((Exam) project).getReviewTopics());
             } else if (project instanceof Assignment){
                 type = "A";
                 special = String.format("Instruction: %s", ((Assignment) project).getSpecialInstructions());
