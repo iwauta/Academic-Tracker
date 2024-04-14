@@ -23,23 +23,26 @@ public class ProjectModel {
 
     }
 
-    public String getProjectName() {
-        return projectName;
-    }
+    public String getProjectName() { return projectName; }
 
     public String projectWeight() {
         return projectWeight;
     }
+
     public String projectDeadline() {
         return projectDeadline;
     }
+
     public String projectType() {
         return projectType;
     }
+
     public String projectSpecial() {
         return projectSpecial;
     }
+
     public String projectPending() {
         return projectPending;
     }
+
 }
