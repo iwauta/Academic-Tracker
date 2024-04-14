@@ -3,7 +3,8 @@ package ca.ucalgary.groupprojectgui;
 import java.io.File;
 
 /**
- * CPSC 233 W24 ca.ucalgary.groupprojectgui.objects.Project ca.ucalgary.groupprojectgui.Main.java -
+ * CPSC 233 W24 ca.ucalgary.groupprojectgui.objects.Project ca.ucalgary.groupprojectgui.Main.java - Main structure of the
+ * project (for shell)
  *
  * @author Utaha Iwai, Dipti Kumar
  * @tutorial T09

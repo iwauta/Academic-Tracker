@@ -8,7 +8,6 @@ import ca.ucalgary.groupprojectgui.util.FileLoader;
 import ca.ucalgary.groupprojectgui.util.FileSaver;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import java.time.LocalDate;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,12 +20,15 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.time.LocalDate;
 import java.io.File;
 import java.util.ArrayList;
 
 /**
- * HelloController - controller for GUI
- *
+ * HelloController - Handles main GUI window
+ * @author Utaha Iwai, Dipti Kumar
+ * @tutorial T09
+ * @email utaha.iwai@ucalgary.ca, dipti.kumar@ucalgary.ca
  */
 public class HelloController {
 

@@ -7,6 +7,10 @@ import java.util.Scanner;
 
 /**
  * ReadFile.java - reads stored data from a file.
+ *
+ * @author Utaha Iwai, Dipti Kumar
+ * @tutorial T09
+ * @email utaha.iwai@ucalgary.ca, dipti.kumar@ucalgary.ca
  */
 public class FileLoader {
 

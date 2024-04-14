@@ -2,10 +2,24 @@ package ca.ucalgary.groupprojectgui.objects;
 
 import java.util.Objects;
 
+/**
+ * Assignment - Represents Assignment, child of Project class with additional properties such as 'specialInstructions'.
+ * @author Utaha Iwai, Dipti Kumar
+ * @tutorial T09
+ * @email utaha.iwai@ucalgary.ca, dipti.kumar@ucalgary.ca
+ */
 public class Assignment extends Project {
 
     String specialInstructions;
 
+    /**
+     * Constructor
+     * @param courseName name of the course
+     * @param projectName name of the assignment
+     * @param projectWeight weighted percentage of the final grade
+     * @param projectDeadline deadline {date, month, year}
+     * @param specialInstructions any other instruction on the assignment
+     */
     public Assignment(String courseName, String projectName, double projectWeight, int[] projectDeadline, String specialInstructions) {
         super(courseName, projectName, projectWeight, projectDeadline);
         this.specialInstructions = specialInstructions;
@@ -17,6 +31,14 @@ public class Assignment extends Project {
      */
     public String getSpecialInstructions(){
         return this.specialInstructions;
+    }
+
+    /**
+     * Setter for specialInstructions
+     * @param specialInstructions additional instructions on the assignment
+     */
+    public void setSpecialInstructions(String specialInstructions) {
+        this.specialInstructions = specialInstructions;
     }
 
     /**
