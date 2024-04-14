@@ -8,6 +8,7 @@ import ca.ucalgary.groupprojectgui.util.FileLoader;
 import ca.ucalgary.groupprojectgui.util.FileSaver;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import java.time.LocalDate;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,15 +21,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.time.LocalDate;
 import java.io.File;
 import java.util.ArrayList;
 
 /**
- * HelloController - Handles main GUI window
- * @author Utaha Iwai, Dipti Kumar
- * @tutorial T09
- * @email utaha.iwai@ucalgary.ca, dipti.kumar@ucalgary.ca
+ * HelloController - controller for GUI
+ *
  */
 public class HelloController {
 
@@ -334,7 +332,7 @@ public class HelloController {
         courseTableView.getItems().clear();
         courseData.clear();
         // Show In-Progress courses only
-        if(inProgressOnlyCheckBox.isSelected()){
+        if (inProgressOnlyCheckBox.isSelected()) {
             courseData = generateCourseTableContents(true);
         } else{ // show all the courses
             courseData = generateCourseTableContents(false);
@@ -405,6 +403,7 @@ public class HelloController {
             if (success) {
                 // Successfully added a project, update the list
                 updateProjectList();
+                System.out.println("projectlistupdtaed");
                 stage.close();
             }
         });
@@ -556,18 +555,24 @@ public class HelloController {
      * Updates the ProjectModel list
      */
     private ArrayList<ProjectModel> generateProjectTableContents(boolean pendingOnly){
-        ArrayList<Project> projects = data.sortProjects();
+        System.out.println("generating table project");
+        ArrayList<Project> projects = new ArrayList<>();
         // ArrayList of ProjectModels to return
         ArrayList<ProjectModel> projectModels = new ArrayList<>();
-        if(pendingOnly) {
+        if (pendingOnly) {
             System.out.println("pending only True");
-            ArrayList<Project> pendingProjects = new ArrayList<>();
-            for (Project project : projects) {
-                if (project.isProjectComplete()) {
-                    pendingProjects.add(project);
+            for (Project project : data.sortProjects()) {
+                if (!project.isProjectComplete()) {
+                    projects.add(project);
+                    System.out.println("added project to projects");
                 }
             }
-            projects = pendingProjects;
+        } else {
+            System.out.println("pending only false");
+            for (Project project : data.sortProjects()) {
+                projects.add(project);
+                System.out.println("added project to projects");
+            }
         }
 
         // Add to the list to return
@@ -584,15 +589,19 @@ public class HelloController {
             String deadline = project.deadlineToString();
             String type = "";
             String special= "";
-            if(project instanceof Exam){
-                type = "E";
+
+            // formatting special instrutions / location / exam topics based on project type
+            if (project instanceof Exam){
+                type = "EXAM";
                 special = String.format("Location: %s, Topics: %s", ((Exam) project).getLocation(), ((Exam) project).getReviewTopics());
             } else if (project instanceof Assignment){
-                type = "A";
+                type = "ASSIGNMENT";
                 special = String.format("Instruction: %s", ((Assignment) project).getSpecialInstructions());
             }
+
             ProjectModel projectModel = new ProjectModel(projectName, courseName, weight, deadline, type, special, pending);
             projectModels.add(projectModel);
+            System.out.println("projectmodel created");
         }
         return projectModels;
     }
@@ -604,10 +613,10 @@ public class HelloController {
         // Clear the existing items in the TableView
         projectTableView.getItems().clear();
         projectData.clear();
-        // Show In-Progress courses only
-        if(pendingOnlyCheckBox.isSelected()){
+        // Show In-Progress projects only
+        if (pendingOnlyCheckBox.isSelected()){
             projectData = generateProjectTableContents(true);
-        } else{ // show all the courses
+        } else { // show all the projects
             projectData = generateProjectTableContents(false);
         }
         // Add all the items to the TableView
@@ -644,15 +653,13 @@ public class HelloController {
                 }
             }
         } else {
-            for (Course course : data.sortCourses()) {
-                courses.add(course); // add from the list
-
-            }
+            // add from the list
+            courses.addAll(data.sortCourses());
         }
         // Add to the list to return
         for (Course course : courses) {
-            String target = String.valueOf(course.getTargetGrade()) + "%";
-            String actual = String.valueOf(course.getActualGrade()) + "%";
+            String target = course.getTargetGrade() + "%";
+            String actual = course.getActualGrade() + "%";
             GradeModel gradeModel = new GradeModel(course.getCourseName(), target, actual);
             gradeModels.add(gradeModel);
         }
@@ -850,3 +857,4 @@ public class HelloController {
 
 
 }
+
