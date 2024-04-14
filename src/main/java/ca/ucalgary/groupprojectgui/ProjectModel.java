@@ -1,5 +1,7 @@
 package ca.ucalgary.groupprojectgui;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
@@ -21,6 +23,16 @@ public class ProjectModel {
         this.projectSpecial = special;
         this.projectPending = pending;
 
+    }
+
+    private final StringProperty project = new SimpleStringProperty();
+
+    public final StringProperty projectProperty() {
+        return project;
+    }
+
+    public final String getProject() {
+        return project.get();
     }
 
     public String getProjectName() { return projectName; }

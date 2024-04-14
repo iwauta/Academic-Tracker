@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b992ee-9616-4c97-8ffa-72d485e94cfd" name="Changes" comment="added a read-me. tried to fix the table errors for project but that is still a work-in-progress">
+    <list default="true" id="d5b992ee-9616-4c97-8ffa-72d485e94cfd" name="Changes" comment="PARTIALLY SHOWS PROJECT TABLE!!!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/HelloController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/ProjectModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/ProjectModel.java" afterDir="false" />
@@ -251,7 +251,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713046884739</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="PARTIALLY SHOWS PROJECT TABLE!!!">
+      <option name="closed" value="true" />
+      <created>1713075041131</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1713075041131</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -293,7 +301,8 @@
     <MESSAGE value="close a course" />
     <MESSAGE value="close a project" />
     <MESSAGE value="added a read-me. tried to fix the table errors for project but that is still a work-in-progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a read-me. tried to fix the table errors for project but that is still a work-in-progress" />
+    <MESSAGE value="PARTIALLY SHOWS PROJECT TABLE!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="PARTIALLY SHOWS PROJECT TABLE!!!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
