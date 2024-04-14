@@ -11,17 +11,17 @@ public class ProjectModel {
     private String projectName;
     private String projectWeight;
     private String projectDeadline;
-    private String projectPending;
-    private String projectSpecial;
     private String projectType;
+    private String projectSpecial;
+    private String projectStatus;
 
-    public  ProjectModel(String projectName, String courseName, String weight, String deadline, String projectType, String special, String pending){
-        this.projectName = String.format("%s (%s)", projectName, courseName);
+    public  ProjectModel(String projectName, String weight, String deadline, String projectType, String special, String status){
+        this.projectName = projectName;
         this.projectWeight = weight;
         this.projectDeadline = deadline;
         this.projectType = projectType;
         this.projectSpecial = special;
-        this.projectPending = pending;
+        this.projectStatus = status;
 
     }
 
@@ -54,7 +54,7 @@ public class ProjectModel {
     }
 
     public String projectPending() {
-        return projectPending;
+        return projectSpecial;
     }
 
 }

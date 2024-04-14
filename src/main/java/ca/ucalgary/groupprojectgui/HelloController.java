@@ -80,13 +80,13 @@ public class HelloController {
     private TableColumn<ProjectModel, String> projectDeadlineColumn;
 
     @FXML
-    private TableColumn<ProjectModel, String> projectPendingColumn;
-
-    @FXML
     private TableColumn<ProjectModel, String> projectTypeColumn;
 
     @FXML
     private TableColumn<ProjectModel, String> projectSpecialColumn;
+
+    @FXML
+    private TableColumn<ProjectModel, String> projectStatusColumn;
 
 
     // Grades
@@ -121,12 +121,12 @@ public class HelloController {
         inProgressColumn.setCellValueFactory(new PropertyValueFactory<>("inProgress"));
 
         // Associate columns with model properties (Projects)
-        projectTypeColumn.setCellValueFactory(new PropertyValueFactory<>("projectType"));
         projectNameColumn.setCellValueFactory(new PropertyValueFactory<>("projectName"));
         projectWeightColumn.setCellValueFactory(new PropertyValueFactory<>("projectWeight"));
         projectDeadlineColumn.setCellValueFactory(new PropertyValueFactory<>("projectDeadline"));
+        projectTypeColumn.setCellValueFactory(new PropertyValueFactory<>("projectType"));
         projectSpecialColumn.setCellValueFactory(new PropertyValueFactory<>("projectSpecial"));
-        projectPendingColumn.setCellValueFactory(new PropertyValueFactory<>("projectPending"));
+        projectStatusColumn.setCellValueFactory(new PropertyValueFactory<>("projectStatus"));
 
         // Associate columns with model properties (Grades)
         gradeCourseNameColumn.setCellValueFactory(new PropertyValueFactory<>("course"));
@@ -144,7 +144,7 @@ public class HelloController {
     }
 
 
-    // Courses
+    /* Courses */
 
     /**
      * Constructs a course entered by the user
@@ -352,7 +352,7 @@ public class HelloController {
 
 
 
-    // Projects
+    /* Projects */
 
     /**
      * Tales user to new stage to add course details
@@ -402,8 +402,8 @@ public class HelloController {
             boolean success = constructProject(courseChoiceBox.getValue(), projectNameTextField.getText(), projectTypeChoiceBox.getValue(),projectWeightTextField.getText(), projectDeadlineDatePicker.getValue(),projectLocationTextFiled.getText(),projectReviewTopicsTextFiled.getText(),projectSpecialInstructionsTextFiled.getText());
             if (success) {
                 // Successfully added a project, update the list
-                updateProjectList();
-                System.out.println("projectlistupdtaed");
+                updateProjectTable();
+                System.out.println("project list updated");
                 stage.close();
             }
         });
@@ -522,9 +522,10 @@ public class HelloController {
             projectCompleter(courseChoiceBox.getValue(),projectChoiceBox.getValue());
             stage.close();
         });
+
         Button cancel = new Button("Cancel");
         cancel.setOnAction(event -> stage.close());
-        newRoot.getChildren().addAll(label,courseChoiceBox,closeCourseButton,cancel);
+        newRoot.getChildren().addAll(label,courseChoiceBox,projectChoiceBox,closeCourseButton,cancel);
         Scene newScene = new Scene(newRoot, 400, 400);
         stage.setScene(newScene);
         stage.setTitle("Mark Project Complete:");
@@ -542,23 +543,23 @@ public class HelloController {
             return;
         }
         for(Project project: data.getAllProjects()){
+            // found project (check courseName and projectName)
             if(project.getCourseName().equals(courseName)&&project.getProjectName().equals(projectName)){
-                project.setProjectComplete();
+                project.setProjectComplete(); // mark complete
+                updateCourseList(); // update the list
                 successStatus(projectName + " for " + courseName+" marked complete.");
-                continue;
+                return;
             }
         }
-        updateCourseList();
     }
 
     /**
-     * Updates the ProjectModel list
+     * Updates the ProjectModel list (used in updateProjectTable)
      */
     private ArrayList<ProjectModel> generateProjectTableContents(boolean pendingOnly){
         System.out.println("generating table project");
-        ArrayList<Project> projects = new ArrayList<>();
-        // ArrayList of ProjectModels to return
-        ArrayList<ProjectModel> projectModels = new ArrayList<>();
+        ArrayList<Project> projects = new ArrayList<>(); // Arraylist of Projects to show info about
+        ArrayList<ProjectModel> projectModels = new ArrayList<>(); // ArrayList of ProjectModels to return
         if (pendingOnly) {
             System.out.println("pending only True");
             for (Project project : data.sortProjects()) {
@@ -577,29 +578,32 @@ public class HelloController {
 
         // Add to the list to return
         for (Project project: projects) {
-            String pending;
-            if(project.isProjectComplete()){
-                pending = "COMPLETE";
-            } else{
-                pending = "PENDING";
-            }
             String courseName = project.getCourseName();
             String projectName = project.getProjectName();
+            // Properties for ProjectModel
+            // projectName for the table ('project (course)')
+            String projectNameWithCourseName = String.format("%s (%s)",projectName,courseName);
             String weight = String.valueOf(project.getProjectWeight());
             String deadline = project.deadlineToString();
             String type = "";
             String special= "";
+            String status;
+            if(project.isProjectComplete()){
+                status = "COMPLETE";
+            } else{
+                status = "PENDING";
+            }
 
-            // formatting special instrutions / location / exam topics based on project type
+            // formatting special instructions / location / exam topics based on project type
             if (project instanceof Exam){
-                type = "EXAM";
-                special = String.format("Location: %s, Topics: %s", ((Exam) project).getLocation(), ((Exam) project).getReviewTopics());
+                type = "E";
+                special = String.format("@%s, Topics: %s", ((Exam) project).getLocation(), ((Exam) project).getReviewTopics());
             } else if (project instanceof Assignment){
-                type = "ASSIGNMENT";
+                type = "A";
                 special = String.format("Instruction: %s", ((Assignment) project).getSpecialInstructions());
             }
 
-            ProjectModel projectModel = new ProjectModel(projectName, courseName, weight, deadline, type, special, pending);
+            ProjectModel projectModel = new ProjectModel(projectNameWithCourseName, weight, deadline, type, special, status);
             projectModels.add(projectModel);
             System.out.println("projectmodel created");
         }
@@ -607,9 +611,9 @@ public class HelloController {
     }
 
     /**
-     * Updates the table of projects
+     * Updates the table of projects using generateProjectTableContents
      */
-    private void updateProjectList(){
+    private void updateProjectTable(){
         // Clear the existing items in the TableView
         projectTableView.getItems().clear();
         projectData.clear();
@@ -631,7 +635,7 @@ public class HelloController {
      */
     @FXML
     void checkPendingOnly(ActionEvent event){
-        updateProjectList();
+        updateProjectTable();
     }
 
 
@@ -711,9 +715,9 @@ public class HelloController {
         }));
         timeline.play();
 
-        // Call updateProjectList() to ensure the table view is initially populated
+        // Call updateProjectTable() to ensure the table view is initially populated
         updateCourseList();
-        updateProjectList();
+        updateProjectTable();
         updateCourseList();
 
     }
@@ -768,7 +772,7 @@ public class HelloController {
                 data = FileLoader.load(selectedFile);
                 successStatus("Loaded file " + selectedFile.getName());
                 updateCourseList();
-                updateProjectList();
+                updateProjectTable();
                 updateGradeList();
             } catch (Exception e) { // Invalid selection
                 errorStatus("Couldn't save data to " + selectedFile.getName());
