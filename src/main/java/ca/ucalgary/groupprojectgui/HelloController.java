@@ -793,7 +793,7 @@ public class HelloController {
         boolean success = FileSaver.save(file, data);
         if (success) {
             status.setTextFill(Color.GREEN);
-            status.setText("Battle saved to " + defaultDirectory + "!");
+            status.setText("Data saved to " + defaultDirectory + "!");
         } else {
             status.setTextFill(Color.RED);
             status.setText("Error! Couldn't save data to " + defaultDirectory);
@@ -813,7 +813,7 @@ public class HelloController {
             boolean success = FileSaver.save(selectedFile, data);
             if (success) {
                 status.setTextFill(Color.GREEN);
-                status.setText("Battle saved to " + defaultDirectory + "!");
+                status.setText("Data saved to " + defaultDirectory + "!");
             } else {
                 status.setTextFill(Color.RED);
                 status.setText("Error! Couldn't save data to " + defaultDirectory);
@@ -831,8 +831,8 @@ public class HelloController {
     void about() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("About");
-        alert.setHeaderText("Course Tracker v" + HelloApplication.version);
-        alert.setContentText(String.format("Author: %s%nEmail: %s%nVersion: %s%n%s", HelloApplication.author, HelloApplication.email, HelloApplication.version, HelloApplication.about));
+        alert.setHeaderText(HelloApplication.PROGRAM_TITLE + " v" + HelloApplication.VERSION);
+        alert.setContentText(String.format("Author: %s%nEmail: %s%nVersion: %s%n%s", HelloApplication.AUTHOR, HelloApplication.EMAIL, HelloApplication.VERSION, HelloApplication.ABOUT));
         // Add OK button
         alert.getButtonTypes().setAll(ButtonType.OK);
         // Show the dialog

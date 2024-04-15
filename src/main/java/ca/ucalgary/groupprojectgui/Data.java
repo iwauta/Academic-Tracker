@@ -1,12 +1,9 @@
 package ca.ucalgary.groupprojectgui;
 
 import ca.ucalgary.groupprojectgui.objects.*;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * CPSC 233 W24 ca.ucalgary.groupprojectgui.objects.Project ca.ucalgary.groupprojectgui.Data.java - stores the data to be tracked. (course info, projects, grades, etc.)
