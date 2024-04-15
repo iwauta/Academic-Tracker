@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="GroupProjectGUI:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5b992ee-9616-4c97-8ffa-72d485e94cfd" name="Changes" comment="modified constructor of ProjectModel">
+    <list default="true" id="d5b992ee-9616-4c97-8ffa-72d485e94cfd" name="Changes" comment="project runs correctly in terminal. running datatest gives an exception">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/GroupProjectGUI_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/ProjectModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ca/ucalgary/groupprojectgui/ProjectModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/readme.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="cmd-tests" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -67,21 +74,28 @@
     "Application.HelloApplication.executor": "Run",
     "Application.Test.executor": "Run",
     "JUnit.DataTest.executor": "Run",
+    "JUnit.Test.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "fix-projecTable-apr14",
+    "git-widget-placeholder": "main",
+    "jdk.selected.JAVA_MODULE": "openjdk-21",
     "kotlin-language-version-configured": "true",
-    "last_directory_selection": "/Users/utaha/Desktop/CPSC233/GroupProjectGUI_CLONE/src/main/java/ca/ucalgary/groupprojectgui"
+    "last_directory_selection": "/Users/utaha/Desktop/CPSC233/GroupProjectGUI_CLONE/src/main/java/ca/ucalgary/groupprojectgui",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\uofc\winter2024\cpsc233\GroupProjectGUI\src\main\java\ca\ucalgary\groupprojectgui\tests" />
       <recent name="$PROJECT_DIR$/src/main/java" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="ca.ucalgary.groupprojectgui" />
+      <recent name="" />
     </key>
   </component>
   <component name="RunManager" selected="Application.HelloApplication">
@@ -100,8 +114,8 @@
     </configuration>
     <configuration name="Test" type="JUnit" factoryName="JUnit">
       <module name="GroupProjectGUI" />
-      <option name="PACKAGE_NAME" value="ca.ucalgary.groupprojectgui" />
-      <option name="MAIN_CLASS_NAME" value="ca.ucalgary.groupprojectgui.DataTest" />
+      <option name="PACKAGE_NAME" value="ca.ucalgary.groupprojectgui.tests" />
+      <option name="MAIN_CLASS_NAME" value="ca.ucalgary.groupprojectgui.tests.DataTest" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
@@ -125,7 +139,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-322ed176" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
       </set>
     </attachedChunks>
   </component>
@@ -282,7 +296,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713115561970</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="project runs correctly in terminal. running datatest gives an exception">
+      <option name="closed" value="true" />
+      <created>1713121722817</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1713121722817</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -326,6 +348,7 @@
     <MESSAGE value="Comment + setter methods + Test file" />
     <MESSAGE value="Copied/pasted changes on ProjectMo&#10;and Controller" />
     <MESSAGE value="modified constructor of ProjectModel" />
-    <option name="LAST_COMMIT_MESSAGE" value="modified constructor of ProjectModel" />
+    <MESSAGE value="project runs correctly in terminal. running datatest gives an exception" />
+    <option name="LAST_COMMIT_MESSAGE" value="project runs correctly in terminal. running datatest gives an exception" />
   </component>
 </project>

@@ -1,0 +1,36 @@
+Index: src/main/java/ca/ucalgary/groupprojectgui/DataTest.java
+===================================================================
+diff --git a/src/main/java/ca/ucalgary/groupprojectgui/DataTest.java b/src/main/java/ca/ucalgary/groupprojectgui/tests/DataTest.java
+rename from src/main/java/ca/ucalgary/groupprojectgui/DataTest.java
+rename to src/main/java/ca/ucalgary/groupprojectgui/tests/DataTest.java
+--- a/src/main/java/ca/ucalgary/groupprojectgui/DataTest.java	
++++ b/src/main/java/ca/ucalgary/groupprojectgui/tests/DataTest.java	
+@@ -1,21 +1,24 @@
+-package ca.ucalgary.groupprojectgui;
++package ca.ucalgary.groupprojectgui.tests;
+ 
+ import ca.ucalgary.groupprojectgui.Data;
+-import ca.ucalgary.groupprojectgui.objects.*;
++import ca.ucalgary.groupprojectgui.objects.Assignment;
++import ca.ucalgary.groupprojectgui.objects.Course;
++import ca.ucalgary.groupprojectgui.objects.Professor;
++import ca.ucalgary.groupprojectgui.objects.Project;
+ import ca.ucalgary.groupprojectgui.util.FileLoader;
+ import ca.ucalgary.groupprojectgui.util.FileSaver;
+ import org.junit.jupiter.api.Assertions;
+ import org.junit.jupiter.api.BeforeEach;
+ import org.junit.jupiter.api.Test;
+-import org.junit.platform.commons.util.Preconditions;
+ 
+ import java.io.File;
+ import java.util.ArrayList;
+ import java.util.NoSuchElementException;
++
+ import static org.junit.jupiter.api.Assertions.*;
+ 
+ /**
+- * ca.ucalgary.groupprojectgui.DataTest.java - test the functionality of the methods in data.java.
++ * ca.ucalgary.groupprojectgui.tests.DataTest.java - test the functionality of the methods in data.java.
+  *
+  * @author Utaha Iwai, Dipti Kumar
+  * @tutorial T09
