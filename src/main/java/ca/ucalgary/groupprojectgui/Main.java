@@ -6,9 +6,9 @@ import java.io.File;
  * CPSC 233 W24 ca.ucalgary.groupprojectgui.objects.Project ca.ucalgary.groupprojectgui.Main.java - Main structure of the
  * project (for shell)
  *
- * @author Utaha Iwai, Dipti Kumar
+ * @author Utaha Iwai
  * @tutorial T09
- * @email utaha.iwai@ucalgary.ca, dipti.kumar@ucalgary.ca
+ * @email utaha.iwai@ucalgary.ca
  */
 
 public class Main {

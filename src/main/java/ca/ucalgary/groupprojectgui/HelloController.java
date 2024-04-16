@@ -23,6 +23,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * HelloController - controller for GUI
@@ -204,11 +205,21 @@ public class HelloController {
         courseName = courseName.replace(" ", ""); // Remove all spaces
         courseName = courseName.toUpperCase();
         profEmail = profEmail.toLowerCase();
+        boolean emailValid = false;
+        try {
+            String profEmailType = "@" + profEmail.split("@")[1];
+            if(HelloApplication.EMAIL_TYPES.contains(profEmailType)){ // one of the supported email type.
+                emailValid = true;
+            } // emailValid stays false otherwise
+        } catch (Exception e){
+            emailValid = false; // doesn't end with @emailType
+        }
+
         // Course name too short or too long
         if (courseName.length() < MIN_LENGTH || courseName.length() > MAX_LENGTH) {
             errorStatus("Invalid course name.");
             return false;
-        } else if (!profEmail.endsWith("@ucalgary.ca")) {
+        } else if (!emailValid) {
             errorStatus("Invalid email address.");
             return false;
         } else if (data.checkExistCourse(courseName)) {
@@ -228,6 +239,7 @@ public class HelloController {
 
         // Adding course
         try {
+//            profName = formatName(profName);
             boolean success= data.storeNewCourse(courseName, profName, profEmail, target);
             if(success) {
                 successStatus("Course stored.");
@@ -238,6 +250,29 @@ public class HelloController {
         }
         return false;
     }
+//
+//    private String formatName(String unformattedName){
+//        String formattedName; // formatted name to return
+//        try{ // separate into array of names (first, middle last, etc.)
+//            String[] names = unformattedName.split(" ");
+//            StringBuilder sb = new StringBuilder(Arrays.toString(names));
+//
+//            for (int i = 0; i < sb.length(); i++){
+//                String name = "";
+//                for(int j=0; j< names[i].length(); j++){
+//                    if(j == 0){ // capitalize the first letter
+//                        name += names[i].charAt(i);
+//                        name.toUpperCase();
+//                    } else{
+//
+//                    }
+//                }
+//                formattedName += names[i].charAt(0).toUpperCase();
+//            }
+//        }
+//
+//        return formattedName;
+//    }
 
     @FXML
     void closeCourse(ActionEvent actionEvent){

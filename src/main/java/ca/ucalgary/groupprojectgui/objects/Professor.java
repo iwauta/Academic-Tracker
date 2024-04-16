@@ -5,9 +5,9 @@ import java.util.Objects;
 /**
  * Professor.java - Represents Professor object
  *
- * @author Utaha Iwai, Dipti Kumar
+ * @author Utaha Iwai
  * @tutorial T09
- * @email utaha.iwai@ucalgary.ca, dipti.kumar@ucalgary.ca
+ * @email utaha.iwai@ucalgary.ca
  */
 public class Professor {
 

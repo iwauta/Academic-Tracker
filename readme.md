@@ -1,5 +1,5 @@
 # Academic Tracker GUI
-### Author: Utaha Iwai (utaha.iwai@ucalgary.ca), Dipti Kumar (dipti.kumar@ucalgary.ca)
+### Author: Utaha Iwai (utaha.iwai@ucalgary.ca) (dipti.kumar@ucalgary.ca)
 This is an academic tracker, where the user is able to input courses they
 are taking at the University of Calgary. The user is able to add projects(exam/assignments)
 under a course, along with information about the project. The user can then

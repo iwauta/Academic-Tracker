@@ -4,9 +4,9 @@ import java.util.Objects;
 
 /**
  * Assignment - Represents Assignment, child of Project class with additional properties such as 'specialInstructions'.
- * @author Utaha Iwai, Dipti Kumar
+ * @author Utaha Iwai
  * @tutorial T09
- * @email utaha.iwai@ucalgary.ca, dipti.kumar@ucalgary.ca
+ * @email utaha.iwai@ucalgary.ca
  */
 public class Assignment extends Project {
 

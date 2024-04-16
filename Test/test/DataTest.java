@@ -17,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * DataTest.java - test the functionality of the methods in data.java.
  *
- * @author Utaha Iwai, Dipti Kumar
+ * @author Utaha Iwai
  * @tutorial T09
- * @profEmail utaha.iwai@ucalgary.ca, dipti.kumar@ucalgary.ca
+ * @profEmail utaha.iwai@ucalgary.ca
  */
 class DataTest {
 

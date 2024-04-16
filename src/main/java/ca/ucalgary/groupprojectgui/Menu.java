@@ -14,9 +14,9 @@ import java.util.ArrayList;
 /**
  * CPSC 233 W24 ca.ucalgary.groupprojectgui.objects.Project ca.ucalgary.groupprojectgui.Menu.java - prompts user to pick an option and corrects data.
  *
- * @author Utaha Iwai, Dipti Kumar
+ * @author Utaha Iwai
  * @tutorial T09
- * @email utaha.iwai@ucalgary.ca, dipti.kumar@ucalgary.ca
+ * @email utaha.iwai@ucalgary.ca
  */
 public class Menu {
     // scanner object
