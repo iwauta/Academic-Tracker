@@ -1,4 +1,4 @@
-package ca.ucalgary.groupprojectgui.objects; /**
+package ca.ucalgary.cpsc233.objects; /**
  * ca.ucalgary.groupprojectgui.objects.Course.java - represents ca.ucalgary.groupprojectgui.objects.Course otherect with properties regarding the course
  */
 

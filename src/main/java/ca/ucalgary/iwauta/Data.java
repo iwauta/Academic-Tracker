@@ -1,6 +1,6 @@
-package ca.ucalgary.groupprojectgui;
+package ca.ucalgary.cpsc233;
 
-import ca.ucalgary.groupprojectgui.objects.*;
+import ca.ucalgary.cpsc233.objects.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

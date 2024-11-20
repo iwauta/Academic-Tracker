@@ -1,4 +1,4 @@
-package ca.ucalgary.groupprojectgui;
+package ca.ucalgary.cpsc233;
 
 enum ProjectType {
     EXAM,

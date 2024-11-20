@@ -1,4 +1,4 @@
-package ca.ucalgary.groupprojectgui.objects;
+package ca.ucalgary.cpsc233.objects;
 
 import java.util.Objects;
 

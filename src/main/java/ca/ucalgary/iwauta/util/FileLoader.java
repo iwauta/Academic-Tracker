@@ -1,6 +1,6 @@
-package ca.ucalgary.groupprojectgui.util;
+package ca.ucalgary.cpsc233.util;
 
-import ca.ucalgary.groupprojectgui.Data;
+import ca.ucalgary.cpsc233.Data;
 
 import java.io.*;
 import java.util.Scanner;

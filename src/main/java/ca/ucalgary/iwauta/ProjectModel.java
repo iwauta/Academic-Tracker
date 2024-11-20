@@ -1,8 +1,7 @@
-package ca.ucalgary.groupprojectgui;
+package ca.ucalgary.cpsc233;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * Model object of Project (for project table)

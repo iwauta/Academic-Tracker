@@ -1,4 +1,4 @@
-package ca.ucalgary.groupprojectgui;
+package ca.ucalgary.cpsc233;
 
 /**
  * Main structure for GUI
@@ -14,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

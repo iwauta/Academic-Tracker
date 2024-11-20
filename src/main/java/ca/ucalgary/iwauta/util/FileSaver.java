@@ -1,10 +1,10 @@
-package ca.ucalgary.groupprojectgui.util;
+package ca.ucalgary.cpsc233.util;
 
-import ca.ucalgary.groupprojectgui.Data;
-import ca.ucalgary.groupprojectgui.objects.Assignment;
-import ca.ucalgary.groupprojectgui.objects.Course;
-import ca.ucalgary.groupprojectgui.objects.Exam;
-import ca.ucalgary.groupprojectgui.objects.Project;
+import ca.ucalgary.cpsc233.Data;
+import ca.ucalgary.cpsc233.objects.Assignment;
+import ca.ucalgary.cpsc233.objects.Course;
+import ca.ucalgary.cpsc233.objects.Exam;
+import ca.ucalgary.cpsc233.objects.Project;
 
 import java.io.*;
 import java.util.Arrays;

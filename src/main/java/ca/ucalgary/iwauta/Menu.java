@@ -1,9 +1,9 @@
-package ca.ucalgary.groupprojectgui;
+package ca.ucalgary.cpsc233;
 
-import ca.ucalgary.groupprojectgui.objects.Course;
-import ca.ucalgary.groupprojectgui.objects.Project;
-import ca.ucalgary.groupprojectgui.util.FileLoader;
-import ca.ucalgary.groupprojectgui.util.FileSaver;
+import ca.ucalgary.cpsc233.objects.Course;
+import ca.ucalgary.cpsc233.objects.Project;
+import ca.ucalgary.cpsc233.util.FileLoader;
+import ca.ucalgary.cpsc233.util.FileSaver;
 
 import java.io.File;
 import java.util.Arrays;
