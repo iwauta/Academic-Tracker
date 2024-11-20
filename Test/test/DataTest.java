@@ -1,9 +1,9 @@
 package test;
 
-import ca.ucalgary.groupprojectgui.Data;
-import ca.ucalgary.groupprojectgui.objects.*;
-import ca.ucalgary.groupprojectgui.util.FileLoader;
-import ca.ucalgary.groupprojectgui.util.FileSaver;
+import ca.ucalgary.iwauta.Data;
+import ca.ucalgary.iwauta.objects.*;
+import ca.ucalgary.iwauta.util.FileLoader;
+import ca.ucalgary.iwauta.util.FileSaver;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

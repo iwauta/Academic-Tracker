@@ -1,6 +1,6 @@
-package ca.ucalgary.cpsc233;
+package ca.ucalgary.iwauta;
 
-import ca.ucalgary.cpsc233.objects.*;
+import ca.ucalgary.iwauta.objects.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

@@ -1,10 +1,10 @@
-package ca.ucalgary.cpsc233.util;
+package ca.ucalgary.iwauta.util;
 
-import ca.ucalgary.cpsc233.Data;
-import ca.ucalgary.cpsc233.objects.Assignment;
-import ca.ucalgary.cpsc233.objects.Course;
-import ca.ucalgary.cpsc233.objects.Exam;
-import ca.ucalgary.cpsc233.objects.Project;
+import ca.ucalgary.iwauta.Data;
+import ca.ucalgary.iwauta.objects.Assignment;
+import ca.ucalgary.iwauta.objects.Course;
+import ca.ucalgary.iwauta.objects.Exam;
+import ca.ucalgary.iwauta.objects.Project;
 
 import java.io.*;
 import java.util.Arrays;

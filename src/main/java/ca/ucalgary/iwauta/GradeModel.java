@@ -1,4 +1,4 @@
-package ca.ucalgary.cpsc233;
+package ca.ucalgary.iwauta;
 
 public class GradeModel {
     private String course;

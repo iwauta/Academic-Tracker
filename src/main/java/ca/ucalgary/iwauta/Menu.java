@@ -1,9 +1,9 @@
-package ca.ucalgary.cpsc233;
+package ca.ucalgary.iwauta;
 
-import ca.ucalgary.cpsc233.objects.Course;
-import ca.ucalgary.cpsc233.objects.Project;
-import ca.ucalgary.cpsc233.util.FileLoader;
-import ca.ucalgary.cpsc233.util.FileSaver;
+import ca.ucalgary.iwauta.objects.Course;
+import ca.ucalgary.iwauta.objects.Project;
+import ca.ucalgary.iwauta.util.FileLoader;
+import ca.ucalgary.iwauta.util.FileSaver;
 
 import java.io.File;
 import java.util.Arrays;

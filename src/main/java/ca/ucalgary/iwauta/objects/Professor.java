@@ -1,4 +1,4 @@
-package ca.ucalgary.cpsc233.objects;
+package ca.ucalgary.iwauta.objects;
 
 import java.util.Objects;
 

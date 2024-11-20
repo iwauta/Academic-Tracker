@@ -59,7 +59,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>ca.ucalgary.groupprojectgui/ca.ucalgary.groupprojectgui.HelloApplication
+                            <mainClass>ca.ucalgary.groupprojectgui/ca.ucalgary.iwauta.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

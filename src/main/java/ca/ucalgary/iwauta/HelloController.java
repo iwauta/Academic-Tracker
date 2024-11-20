@@ -1,11 +1,11 @@
-package ca.ucalgary.cpsc233;
+package ca.ucalgary.iwauta;
 
-import ca.ucalgary.cpsc233.objects.Assignment;
-import ca.ucalgary.cpsc233.objects.Course;
-import ca.ucalgary.cpsc233.objects.Exam;
-import ca.ucalgary.cpsc233.objects.Project;
-import ca.ucalgary.cpsc233.util.FileLoader;
-import ca.ucalgary.cpsc233.util.FileSaver;
+import ca.ucalgary.iwauta.objects.Assignment;
+import ca.ucalgary.iwauta.objects.Course;
+import ca.ucalgary.iwauta.objects.Exam;
+import ca.ucalgary.iwauta.objects.Project;
+import ca.ucalgary.iwauta.util.FileLoader;
+import ca.ucalgary.iwauta.util.FileSaver;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import java.time.LocalDate;

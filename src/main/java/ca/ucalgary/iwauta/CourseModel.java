@@ -1,4 +1,4 @@
-package ca.ucalgary.cpsc233;
+package ca.ucalgary.iwauta;
 
 /**
  * Model object of Course (for course table)

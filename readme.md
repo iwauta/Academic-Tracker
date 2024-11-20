@@ -13,7 +13,7 @@ in progress in their dashboard. Similarly, users can mark assignments complete a
 only choose to see in-progress projects.
 
 ## How to run
-#### Program launched from src/java/ca.ucalgary.groupprojectgui/HelloApplication (main class)
+#### Program launched from src/java/ca.ucalgary.iwauta/HelloApplication (main class)
 Ensure your system has jdk-22, and java.
 Download javafx-sdk-22 from https://gluonhq.com/products/javafx/ into C:/Users/Program Files
 

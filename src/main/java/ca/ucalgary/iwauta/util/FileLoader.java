@@ -1,6 +1,6 @@
-package ca.ucalgary.cpsc233.util;
+package ca.ucalgary.iwauta.util;
 
-import ca.ucalgary.cpsc233.Data;
+import ca.ucalgary.iwauta.Data;
 
 import java.io.*;
 import java.util.Scanner;

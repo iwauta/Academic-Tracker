@@ -1,4 +1,4 @@
-package ca.ucalgary.cpsc233;
+package ca.ucalgary.iwauta;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
